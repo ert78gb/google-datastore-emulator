@@ -4,7 +4,7 @@ const DEFAULT_OPTIONS = {
     storeOnDisk: false,
     legacy: false,
     clean: true,
-    debug:false
+    debug: false
 };
 
 const EmulatorStates = require('./emulator-states');
@@ -20,8 +20,8 @@ class DataStoreEmulator {
 
     constructor(options) {
         this._emulator = null;
-        this._options = DEFAULT_OPTIONS;
-        Object.assign(this._options, options);
+        this._options = {};
+        this._options = Object.assign(this._options, DEFAULT_OPTIONS, options);
 
         this._emulator_host = null;
         this._state = null;
@@ -30,21 +30,22 @@ class DataStoreEmulator {
         const self = this;
         process.on('exit', () => {
             self.stop();
-        })
+        });
     }
 
     start() {
         const self = this;
 
-        if (this._state)
-            throw new Error('Datastore emulator is already running.');
-
-        const params = this._getCommandParameters();
-        self._emulator = spawn('gcloud', params);
-
-        self._registerEmulatorListeners();
-
         return new Promise((resolve, reject) => {
+
+            if (this._state)
+                throw new Error('Datastore emulator is already running.');
+
+            const params = this._getCommandParameters();
+            self._emulator = spawn('gcloud', params);
+
+            self._registerEmulatorListeners();
+
 
             function startSuccessListener() {
                 removeStartListeners();
@@ -116,7 +117,6 @@ class DataStoreEmulator {
         if (text.indexOf(DATASTORE_EMULATOR_HOST_KEY) > -1) {
             let s = text.substring(text.indexOf('=') + 1);
             this._emulator_host = s.substr(0, s.indexOf('\n'));
-            let a = 1;
         }
 
         if (text.indexOf(DEV_APP_SERVER_RUNNING_KEY) > -1) {
@@ -136,10 +136,9 @@ class DataStoreEmulator {
             params.push(`--host-port=${this._options.host}:${this._options.port}`);
         }
         else if (!this._options.host && this._options.port) {
-            throw new Error('If you set port you need to set host.')
+            params.push(`--host-port=localhost:${this._options.port}`);
         }
-        else if (this._options.host && !this._options.port)
-        {
+        else if (this._options.host && !this._options.port) {
             throw new Error('If you set host you need to set port.')
         }
 

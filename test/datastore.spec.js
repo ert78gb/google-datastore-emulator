@@ -4,6 +4,7 @@
 const chai = require('chai');
 const Emulator = require('../index');
 const fs = require('fs');
+const fse = require('fs-extra');
 
 chai.use(require("chai-as-promised"));
 
@@ -13,8 +14,27 @@ const testData = {
 };
 
 describe('Google DataStore Emulator Test', () => {
+    const emulatorDir = './emulator-test3';
 
-    it('should start the emulator with env.GCLOUD_PROJECT', (done) => {
+    before((done) => {
+        if (directoryExists(emulatorDir))
+            fse.remove(emulatorDir, (err) => {
+                return done(err);
+            });
+        else {
+            done()
+        }
+    });
+
+    beforeEach(() => {
+        process.env.GCLOUD_PROJECT = null;
+    });
+
+    afterEach(() => {
+        process.env.GCLOUD_PROJECT = null;
+    });
+
+    it('should start the emulator with env.GCLOUD_PROJECT', () => {
         process.env.GCLOUD_PROJECT = 'test';
 
         let entityKey;
@@ -25,7 +45,7 @@ describe('Google DataStore Emulator Test', () => {
 
         let emulator = new Emulator(options);
 
-        emulator.start()
+        return emulator.start()
             .then(() => {
                 const datastore = require('@google-cloud/datastore')();
                 entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
@@ -49,19 +69,9 @@ describe('Google DataStore Emulator Test', () => {
             .then(() => {
                 return emulator.stop();
             })
-            .then(() => {
-                process.env.GCLOUD_PROJECT = null;
-                done();
-            })
-            .catch((error) => {
-                process.env.GCLOUD_PROJECT = null;
-                expect(error).to.be.nok;
-                done();
-            })
-
     });
 
-    it('should not write to console if debug=false', (done) => {
+    it('should not write to console if debug=false', () => {
         process.env.GCLOUD_PROJECT = 'test';
         let wroteDataStore = false;
         console.log = function (d) {
@@ -77,7 +87,7 @@ describe('Google DataStore Emulator Test', () => {
 
         let emulator = new Emulator(options);
 
-        emulator.start()
+        return emulator.start()
             .then(() => {
                 return emulator.stop();
             })
@@ -85,17 +95,11 @@ describe('Google DataStore Emulator Test', () => {
                 delete console.log;
                 expect(wroteDataStore).to.be.equal(false);
                 process.env.GCLOUD_PROJECT = null;
-                done();
-            })
-            .catch((error) => {
-                process.env.GCLOUD_PROJECT = null;
-                expect(error).to.be.nok;
-                done();
             })
 
     });
 
-    it('should start the emulator when set project Id', (done) => {
+    it('should start the emulator when set project Id', () => {
         const projectId = 'test2';
         let entityKey;
 
@@ -106,7 +110,7 @@ describe('Google DataStore Emulator Test', () => {
 
         let emulator = new Emulator(options);
 
-        emulator.start()
+        return emulator.start()
             .then(() => {
                 const datastore = require('@google-cloud/datastore')({
                     projectId
@@ -130,23 +134,17 @@ describe('Google DataStore Emulator Test', () => {
                 expect(result.length).to.be.equal(1);
                 const entity = result[0];
                 expect(entity).to.be.deep.equal(testData);
+
+                return Promise.resolve();
             })
             .then(() => {
                 return emulator.stop();
             })
-            .then(() => {
-                done();
-            })
-            .catch((error) => {
-                expect(error).to.be.nok;
-                done();
-            })
-
     });
 
-    it('should start the emulator when set project Id and dataDir', (done) => {
+    it('should start the emulator when set project Id and dataDir', () => {
         const projectId = 'test3';
-        const dataDir = './emulator-test3';
+        const dataDir = emulatorDir;
 
         expect(directoryExists(dataDir)).to.be.equal(false);
 
@@ -160,7 +158,7 @@ describe('Google DataStore Emulator Test', () => {
 
         let emulator = new Emulator(options);
 
-        emulator.start()
+        return emulator.start()
             .then(() => {
                 expect(directoryExists(dataDir)).to.be.equal(true);
 
@@ -186,20 +184,18 @@ describe('Google DataStore Emulator Test', () => {
                 expect(result.length).to.be.equal(1);
                 const entity = result[0];
                 expect(entity).to.be.deep.equal(testData);
+
+                return Promise.resolve();
             })
             .then(() => {
                 return emulator.stop();
             })
             .then(() => {
                 expect(directoryExists(dataDir)).to.be.equal(false);
-                done();
-            })
-            .catch((error) => {
-                expect(error).to.be.nok;
             })
     });
 
-    it('should start the emulator with specified host and port', (done) => {
+    it('should start the emulator with specified host and port', () => {
         process.env.GCLOUD_PROJECT = 'test';
         let entityKey;
 
@@ -211,7 +207,7 @@ describe('Google DataStore Emulator Test', () => {
 
         let emulator = new Emulator(options);
 
-        emulator.start()
+        return emulator.start()
             .then(() => {
 
                 expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`${options.host}:${options.port}`);
@@ -230,26 +226,69 @@ describe('Google DataStore Emulator Test', () => {
                 return datastore.get(entityKey);
             })
             .then((result) => {
-                expect(result.length).to.be.equal(1);
-                const entity = result[0];
-                expect(entity).to.be.deep.equal(testData);
+                return emulator.stop()
+                    .then(() => {
+                        expect(result.length).to.be.equal(1);
+                        const entity = result[0];
+                        expect(entity).to.be.deep.equal(testData);
+                    })
             })
-            .then(() => {
-                return emulator.stop();
-            })
-            .then(() => {
-                process.env.GCLOUD_PROJECT = null;
-                done();
-            })
-            .catch((error) => {
-                process.env.GCLOUD_PROJECT = null;
-                expect(error).to.be.nok;
-                done();
-            })
-
     });
 
-    it('should not start twice', (done) => {
+    it('should throw error when call only with host options', () => {
+        process.env.GCLOUD_PROJECT = 'test';
+
+        let options = {
+            debug: true,
+            host: 'localhost'
+        };
+
+        let emulator = new Emulator(options);
+
+        return expect(emulator.start()).to.eventually.be.rejectedWith('If you set host you need to set port');
+    });
+
+    it('should start the emulator on localhost when specified only port', () => {
+        process.env.GCLOUD_PROJECT = 'test';
+        let entityKey;
+
+        let options = {
+            debug: true,
+            port: 8555
+        };
+
+        let emulator = new Emulator(options);
+
+        return emulator.start()
+            .then(() => {
+
+                expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`localhost:${options.port}`);
+                const datastore = require('@google-cloud/datastore')();
+                entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+                const testEntity = {
+                    key: entityKey,
+                    data: testData
+                };
+
+                return datastore.save(testEntity);
+            })
+            .then(() => {
+                const datastore = require('@google-cloud/datastore')();
+
+                return datastore.get(entityKey);
+            })
+            .then((result) => {
+                return emulator.stop()
+                    .then(() => {
+                        expect(result.length).to.be.equal(1);
+                        const entity = result[0];
+                        expect(entity).to.be.deep.equal(testData);
+
+                    });
+            })
+    });
+
+    it('should not start twice', () => {
         process.env.GCLOUD_PROJECT = 'test';
 
         let options = {
@@ -258,28 +297,30 @@ describe('Google DataStore Emulator Test', () => {
 
         let emulator = new Emulator(options);
 
-        emulator.start()
+        return emulator.start()
             .then(() => {
-                return emulator.start();
+                return expect(emulator.start()).to.rejected;
             })
-            .then(() => {
-                done('it should be throw error');
+            .then((error) => {
+                return emulator.stop().then(() => {
+                    expect(error).to.have.property('message', 'Datastore emulator is already running.');
+                });
             })
-            .catch((error) => {
-                process.env.GCLOUD_PROJECT = null;
-                expect(error.message).to.be.equal('Datastore emulator is already running.');
-                return emulator.stop()
-            })
-            .then(() => {
-                done();
-            })
-            .catch((error) => {
-                expect(error).to.be.nok;
-                done();
-            })
-
     })
 
+    it('should return ok when call stop twice', ()=>{
+        process.env.GCLOUD_PROJECT = 'test';
+
+        let options = {
+            debug: true
+        };
+
+        let emulator = new Emulator(options);
+
+        return emulator.stop()
+            .then(emulator.stop.bind(emulator))
+            .then(emulator.stop.bind(emulator));
+    });
 });
 
 function directoryExists(dir) {
