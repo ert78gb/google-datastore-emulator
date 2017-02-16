@@ -6,6 +6,7 @@ const DEFAULT_OPTIONS = {
     clean: true,
     debug: false
 };
+const newline = require('os').EOL;
 
 const EmulatorStates = require('./emulator-states');
 const spawn = require('child_process').spawn;
@@ -42,7 +43,7 @@ class DataStoreEmulator {
                 throw new Error('Datastore emulator is already running.');
 
             const params = this._getCommandParameters();
-            self._emulator = spawn('gcloud', params);
+            self._emulator = spawn('gcloud', params, { shell: true });
 
             self._registerEmulatorListeners();
 
@@ -116,7 +117,7 @@ class DataStoreEmulator {
 
         if (text.indexOf(DATASTORE_EMULATOR_HOST_KEY) > -1) {
             let s = text.substring(text.indexOf('=') + 1);
-            this._emulator_host = s.substr(0, s.indexOf('\n'));
+            this._emulator_host = s.substr(0, s.indexOf(newline));
         }
 
         if (text.indexOf(DEV_APP_SERVER_RUNNING_KEY) > -1) {
