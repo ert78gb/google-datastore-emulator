@@ -16,10 +16,10 @@ install:
   # Install gcloud sdk
   - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.zip -OutFile c:\temp\google-cloud-sdk.zip
   - cmd: 7z e c:\temp\google-cloud-sdk.zip -oc:\temp\google-cloud-sdk -y
-  - cmd: c:\temp\google-cloud-sdk
+  - cmd: cd c:\temp\google-cloud-sdk
   - cmd: install.bat /S /D=C:\CloudSDK /singleuser /noreporting /nostartmenu /nodesktop
   # Install datastore emulator component
-  - gcloud components install cloud-datastore-emulator
+  - cmd: gcloud components install cloud-datastore-emulator
   # Install node.js versions
   - ps: Install-Product node $env:nodejs_version $env:platform
   # Install npm dependencies
