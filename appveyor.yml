@@ -1,0 +1,34 @@
+environment:
+  matrix:
+    - nodejs_version: "6"
+    - nodejs_version: "7"
+
+platform:
+  - x86
+  - x64
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Install python
+  - cinst python2
+  # Install gcloud sdk
+  - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.zip -OutFile c:\temp\google-cloud-sdk.zip
+  - cmd: 7z e c:\temp\google-cloud-sdk.zip -oc:\temp\google-cloud-sdk -y
+  - cmd: c:\temp\google-cloud-sdk\install.bat /S /D=C:\CloudSDK /singleuser /noreporting /nostartmenu /nodesktop
+  # Install datastore emulator component
+  - gcloud components install cloud-datastore-emulator
+  # Install node.js versions
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  # Install npm dependencies
+  - npm install
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
+  - npm test
+
+# Don't actually build.
+build: off
