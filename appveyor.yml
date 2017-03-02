@@ -16,6 +16,7 @@ install:
   - GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=C:\google
   # prepare for non-interactive Cloud SDK components update
   - gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
+  - refreshenv
   # update all Cloud SDK components
   - gcloud.cmd components update --quiet
   # install datastore emulator
