@@ -22,7 +22,7 @@ install:
   # Add gcloud to path
   - ps: $env:Path += ";%GC_PATH%\google-cloud-sdk\bin"
   # Refresh environment variables.
-  - cmd: refreshenv
+  - ps: refreshenv
   # Install datastore emulator component
   - cmd: gcloud components install cloud-datastore-emulator
   # Install node.js versions
