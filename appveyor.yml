@@ -20,6 +20,8 @@ install:
   - refreshenv
   # update all Cloud SDK components
   - gcloud.cmd components update --quiet
+  # add beta component
+  - gcloud.cmd components install beta --quiet
   # install datastore emulator
   - gcloud.cmd components install cloud-datastore-emulator --quiet
   # Install node.js versions
