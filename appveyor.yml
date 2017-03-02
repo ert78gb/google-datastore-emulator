@@ -1,5 +1,5 @@
 environment:
-  GC_PATH: 'C:\\Program Files\\Google\\Cloud SDK\\google-cloud-sdk.staging\\bin'
+  GC_PATH: 'C:\CloudSDK'
   matrix:
     - nodejs_version: "6"
     - nodejs_version: "7"
@@ -18,11 +18,12 @@ install:
   - cmd: refreshenv
   # Install gcloud sdk
   - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe -OutFile c:\temp\GoogleCloudSDKInstaller.exe
-  - cmd: c:\temp\GoogleCloudSDKInstaller.exe /S /singleuser /noreporting /nostartmenu /nodesktop
+  - cmd: c:\temp\GoogleCloudSDKInstaller.exe /S /singleuser /noreporting /nostartmenu /nodesktop /D=%GC_PATH%
   # Add gcloud to path
   - set PATH=%PATH%;%GC_PATH%
   # Refresh environment variables.
   - cmd: refreshenv
+  - dir %GC_PATH% /s /b /o:gn
   # Install datastore emulator component
   - cmd: gcloud components install cloud-datastore-emulator
   # Install node.js versions
