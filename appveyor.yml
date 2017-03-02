@@ -23,6 +23,7 @@ install:
   - cmd: set PATH=%PATH%;%GC_PATH%\google-cloud-sdk\bin
   # Refresh environment variables.
   - cmd: refreshenv
+  - cmd: ECHO %PATH%
   # Install datastore emulator component
   - cmd: gcloud components install cloud-datastore-emulator
   # Install node.js versions
