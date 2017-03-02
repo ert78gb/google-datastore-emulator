@@ -20,7 +20,7 @@ install:
   - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe -OutFile c:\temp\GoogleCloudSDKInstaller.exe
   - cmd: c:\temp\GoogleCloudSDKInstaller.exe /S /singleuser /noreporting /nostartmenu /nodesktop /D=%GC_PATH%
   # Add gcloud to path
-  - set PATH=%PATH%;%GC_PATH%\bin
+  - set PATH=%PATH%;%GC_PATH%\google-cloud-sdk\bin
   # Refresh environment variables.
   - cmd: refreshenv
   # Install datastore emulator component
