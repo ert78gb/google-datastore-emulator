@@ -13,6 +13,8 @@ install:
   - ps: New-Item -ItemType directory -Path c:\temp
   # Install python
   - cinst python2
+  # Refresh environment variables. Add python to path
+  - cmd: refreshenv
   # Install gcloud sdk
   - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.zip -OutFile c:\temp\google-cloud-sdk.zip
   - cmd: 7z e c:\temp\google-cloud-sdk.zip -oc:\temp\google-cloud-sdk -y
