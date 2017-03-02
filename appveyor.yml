@@ -13,7 +13,8 @@ install:
   # download Cloud SDK
   - appveyor DownloadFile https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe
   # install Cloud SDK
-  - GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=C:\google
+  - GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=%GC_PATH%
+  - SET PATH=%PATH%;%GC_PATH%\google-cloud-sdk\;%GC_PATH%\google-cloud-sdk\bin\
   # prepare for non-interactive Cloud SDK components update
   - gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
   - refreshenv
