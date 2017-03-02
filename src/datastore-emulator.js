@@ -99,9 +99,9 @@ class DataStoreEmulator {
             }
 
             function removeStopListeners() {
-                self._stateEmitter.on(EmulatorStates.EXIT, stopListener.bind(this));
+                self._stateEmitter.removeListener(EmulatorStates.EXIT, stopListener.bind(this));
 
-                self._stateEmitter.on(EmulatorStates.CLOSE, stopListener.bind(this));
+                self._stateEmitter.removeListener(EmulatorStates.CLOSE, stopListener.bind(this));
             }
 
             this._stateEmitter.on(EmulatorStates.EXIT, stopListener.bind(this));
