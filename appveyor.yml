@@ -16,8 +16,10 @@ install:
   # Refresh environment variables. Add python to path
   - cmd: refreshenv
   # Install gcloud sdk
-  - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe -OutFile GoogleCloudSDKInstaller.exe
-  - cmd: c:\temp\google-cloud-sdk\GoogleCloudSDKInstaller.exe /S /D=C:\CloudSDK /singleuser /noreporting /nostartmenu /nodesktop
+  - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe -OutFile c:\temp\GoogleCloudSDKInstaller.exe
+  - cmd: c:\temp\GoogleCloudSDKInstaller.exe /S /singleuser /noreporting /nostartmenu /nodesktop
+  # Refresh environment variables. Add google-cloud-sdk to path
+  - cmd: refreshenv
   # Install datastore emulator component
   - cmd: gcloud components install cloud-datastore-emulator
   # Install node.js versions
