@@ -21,7 +21,7 @@ install:
   # Refresh environment variables. Add google-cloud-sdk to path
   - cmd: refreshenv
   # Install datastore emulator component
-  - cmd: "C:\\Program Files\\Google\\Cloud SDK\\google-cloud-sdk.staging\\bin\\gcloud components install cloud-datastore-emulator"
+  - cmd: "'C:\\Program Files\\Google\\Cloud SDK\\google-cloud-sdk.staging\\bin\\gcloud' components install cloud-datastore-emulator"
   # Install node.js versions
   - ps: Install-Product node $env:nodejs_version $env:platform
   # Install npm dependencies
