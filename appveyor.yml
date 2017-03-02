@@ -20,7 +20,7 @@ install:
   - ps: Invoke-WebRequest https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe -OutFile c:\temp\GoogleCloudSDKInstaller.exe
   - cmd: c:\temp\GoogleCloudSDKInstaller.exe /S /singleuser /noreporting /nostartmenu /nodesktop /D=%GC_PATH%
   # Add gcloud to path
-  - cmd: set PATH=%PATH%;%GC_PATH%\google-cloud-sdk\bin
+  - ps: $env:Path += ";%GC_PATH%\google-cloud-sdk\bin"
   # Refresh environment variables.
   - cmd: refreshenv
   # Install datastore emulator component
@@ -43,5 +43,5 @@ build: off
 matrix:
   fast_finish: true
 # Access to VM via RDP
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
