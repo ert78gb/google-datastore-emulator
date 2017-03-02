@@ -37,3 +37,5 @@ test_script:
 
 # Don't actually build.
 build: off
+matrix:
+  fast_finish: true
