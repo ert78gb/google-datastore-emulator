@@ -10,7 +10,7 @@ platform:
 # Install scripts. (runs after repo cloning)
 install:
   # Create temp directory
-  - ps: New-Item -ItemType directory -Path C:\Scripts\newDir
+  - ps: New-Item -ItemType directory -Path c:\temp
   # Install python
   - cinst python2
   # Install gcloud sdk
