@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ert78gb/google-datastore-emulator.svg?branch=master)](https://travis-ci.org/ert78gb/google-datastore-emulator)
+
 Google Cloud Datastore Emulator
 ===============================
 
