@@ -18,6 +18,8 @@ describe('Google DataStore Emulator Test', () => {
     const emulatorDir = './emulator-test3';
 
     before((done) => {
+        process.env.CLOUDSDK_CORE_PROJECT = 'test';
+
         if (directoryExists(emulatorDir))
             fse.remove(emulatorDir, (err) => {
                 return done(err);
