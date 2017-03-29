@@ -5,6 +5,7 @@ const chai = require('chai');
 const Emulator = require('../index');
 const fs = require('fs');
 const fse = require('fs-extra');
+const nodeCleanup = require('node-cleanup');
 
 chai.use(require("chai-as-promised"));
 
@@ -75,10 +76,14 @@ describe('Google DataStore Emulator Test', () => {
         process.env.GCLOUD_PROJECT = 'test';
         let wroteDataStore = false;
         console.log = function (d) {
+            process.stdout.write(d + '\n');
+
+            if(!d)
+                return;
+
             if (d.indexOf('[datastore]') > -1) {
                 wroteDataStore = true;
             }
-            process.stdout.write(d + '\n');
         };
 
         let options = {
@@ -306,9 +311,9 @@ describe('Google DataStore Emulator Test', () => {
                     expect(error).to.have.property('message', 'Datastore emulator is already running.');
                 });
             })
-    })
+    });
 
-    it('should return ok when call stop twice', ()=>{
+    it('should return ok when call stop twice', () => {
         process.env.GCLOUD_PROJECT = 'test';
 
         let options = {
@@ -317,10 +322,35 @@ describe('Google DataStore Emulator Test', () => {
 
         let emulator = new Emulator(options);
 
-        return emulator.stop()
+        return emulator.start()
             .then(emulator.stop.bind(emulator))
             .then(emulator.stop.bind(emulator));
     });
+
+    it('process.exit should kill child processes', function (done) {
+        this.timeout(10000);
+
+        process.env.GCLOUD_PROJECT = 'test';
+
+        let options = {
+            debug: true
+        };
+
+        let emulator = new Emulator(options);
+        let calledDone = false;
+
+        emulator.start()
+            .then(() => {
+                nodeCleanup(() => {
+                    if (!calledDone) {
+                        calledDone = true;
+                        setTimeout(done, 2000);
+                    }
+                });
+
+                process.kill(process.pid);
+            })
+    })
 });
 
 function directoryExists(dir) {
