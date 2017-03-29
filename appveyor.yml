@@ -35,7 +35,7 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - npm test:appveyor
+  - npm run test:appveyor
 
 # Don't actually build.
 build: off
