@@ -76,10 +76,14 @@ describe('Google DataStore Emulator Test', () => {
         process.env.GCLOUD_PROJECT = 'test';
         let wroteDataStore = false;
         console.log = function (d) {
+            process.stdout.write(d + '\n');
+
+            if(!d)
+                return;
+
             if (d.indexOf('[datastore]') > -1) {
                 wroteDataStore = true;
             }
-            process.stdout.write(d + '\n');
         };
 
         let options = {
