@@ -13,6 +13,7 @@ const spawn = require('child_process').spawn;
 const EventEmitter = require('events');
 const fse = require('fs-extra');
 const kill = require('tree-kill');
+const nodeCleanup = require('node-cleanup');
 
 class DataStoreStateEmitter extends EventEmitter {
 }
@@ -29,8 +30,10 @@ class DataStoreEmulator {
         this._stateEmitter = new DataStoreStateEmitter();
 
         const self = this;
-        process.on('exit', () => {
+        nodeCleanup(() => {
             self.stop();
+            nodeCleanup.uninstall();
+            return false;
         });
     }
 
@@ -43,7 +46,7 @@ class DataStoreEmulator {
                 throw new Error('Datastore emulator is already running.');
 
             const params = this._getCommandParameters();
-            self._emulator = spawn('gcloud', params, { shell: true });
+            self._emulator = spawn('gcloud', params, {shell: true});
 
             self._registerEmulatorListeners();
 
