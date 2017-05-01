@@ -42,7 +42,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
     process.env.GCLOUD_PROJECT = null;
   });
 
-  it.only('should start the emulator with env.GCLOUD_PROJECT', () => {
+  it('should start the emulator with env.GCLOUD_PROJECT', () => {
     process.env.GCLOUD_PROJECT = 'test';
 
     let entityKey;
@@ -72,7 +72,6 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         return datastore.get(entityKey);
       })
       .then((result) => {
-      console.log('result', result);
         expect(result.length).to.be.equal(1);
         const entity = result[0];
         expect(entity).to.be.deep.equal(testData);
@@ -159,7 +158,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       })
   });
 
-  it('should start the emulator when set project Id and dataDir', () => {
+  it.only('should start the emulator when set project Id and dataDir', () => {
     const projectId = 'test3';
     const dataDir = emulatorDir;
 
