@@ -29,6 +29,8 @@ install:
   - gcloud.cmd components install cloud-datastore-emulator --quiet
   # Install node.js versions
   - ps: Install-Product node $env:nodejs_version $env:platform
+  # Pull google/cloud-sdk Docker image
+  - docker pull google/cloud-sdk
   # Install npm dependencies
   - npm install
 
