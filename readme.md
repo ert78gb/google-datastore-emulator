@@ -62,7 +62,7 @@ parameter (type) | default value | description
 ---------- | --------------- | -------------------
 projectId (string) | empty | This variable is datastore project Id. If it is empty, GCLOUD_PROJECT environment variable will be used. Either you should set it directly or the environment variable should be set.
 storeOnDisk (boolean) | false | The datastore either persists the entities on disk or not.
-dataDir (string) | empty | The emulator creates a directory where the project files are stored. If it is empty the emulator default value will be used. You could set relative ./directory or absolute path /tmp/dir1/dir2/. If this directory does not exist, it will be created.
+dataDir (string) | empty | The emulator creates a directory where the project files are stored. If it is empty the emulator default value will be used. You could set relative ./directory or absolute path /tmp/dir1/dir2/. If this directory does not exist, it will be created. **Bug** : With linux Docker host don't delete the folder
 clean (boolean) | true | If dataDir value is set and 'clean' value is true then the package deletes the dataDir. The package **does not** delete the gcloud emulator default directory. 
 host (string) | localhost | If it is empty the'localhost' of google default value is used. It can take the form of a single address (hostname, IPv4, or IPv6)
 port (number) | 8081 | If it is empty the emulator selects a random free port.

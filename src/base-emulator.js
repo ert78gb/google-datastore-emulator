@@ -197,6 +197,7 @@ class BaseEmulator {
       return Promise.resolve();
 
     return new Promise((resolve, reject) => {
+      // TODO Handle Docker Linux host / container permission magic
       fse.remove(this._options.dataDir, (err) => {
         /* istanbul ignore if */
         if (err) return reject(err);
@@ -212,7 +213,7 @@ class BaseEmulator {
    */
   _createDataDirSync() {
     const self = this;
-    fse.ensureDir(path.join(this._options.dataDir, 'WEB-INF'), function (err) {
+    fse.ensureDir(this._options.dataDir, function (err) {
       /* istanbul ignore if */
       if (err)
         throw new Error(`Can not create datadir: ${self._options.dataDir}, error: ${err}`)
