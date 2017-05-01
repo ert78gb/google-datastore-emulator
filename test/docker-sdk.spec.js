@@ -49,7 +49,8 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
     let options = {
       debug: true,
-      useDocker: true
+      useDocker: true,
+      project: 'test'
     };
 
     let emulator = new Emulator(options);
