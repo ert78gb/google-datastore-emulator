@@ -4,9 +4,9 @@
   "description": "NodeJs wrapper to google datastore emulator. It could start and stop emulator as node module",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --ui bdd test/**/*.spec.js --timeout 120000",
-    "test:appveyor": "mocha --reporter mocha-appveyor-reporter --reporter-options appveyorBatchSize=1 --ui bdd test/**/*.spec.js --timeout 120000",
-    "coverage": "istanbul cover node_modules/.bin/_mocha -- --ui bdd test/**/*.spec.js --timeout 120000"
+    "test": "mocha --ui bdd test/**/*.spec.js --timeout 250000",
+    "test:appveyor": "mocha --reporter mocha-appveyor-reporter --reporter-options appveyorBatchSize=1 --ui bdd test/**/*.spec.js --timeout 250000",
+    "coverage": "istanbul cover node_modules/.bin/_mocha -- --ui bdd test/**/*.spec.js --timeout 250000"
   },
   "keywords": [
     "google",
@@ -22,7 +22,7 @@
   "author": "Robert Kiss <ert78gb@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@google-cloud/datastore": "^1.0.0",
+    "@google-cloud/datastore": "^1.0.1",
     "dockerode": "^2.4.3",
     "fs-extra": "^2.0.0",
     "node-cleanup": "^2.1.2",
