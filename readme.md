@@ -12,17 +12,17 @@ Perfect to support unit testing where the persistent layer is the gcloud Datasto
 
 The wrapper sets DATASTORE_EMULATOR_HOST and DATASTORE_PROJECT_ID environment variables.
 
-#Prerequisites
+# Prerequisites
 To use the emulator locally you need to install [Google Cloud SDK](https://cloud.google.com/sdk/downloads) or
 with Docker you need to install [Docker host](https://www.docker.com/community-edition)  
 
 
-#Installation
+# Installation
 ```
 npm install google-datastore-emulator --save-dev
 ```
 
-#Usage
+# Usage
 I think the package is the most suitable for unit testing.
  
 ```javascript
@@ -77,6 +77,6 @@ name | description
 start | Starts the emulator and returns a Promise.
 stop | Stops the emulator and returns a Promise.
 
-#License
+# License
 
 MIT
