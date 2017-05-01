@@ -1,5 +1,6 @@
 'use strict';
 
+const envDescribe = process.env.APPVEYOR === 'True' ? describe.skip : describe;
 
 const chai = require('chai');
 const Emulator = require('../index');
@@ -17,7 +18,8 @@ const testData = {
   testProp: 'test-data'
 };
 
-describe('Docker Container Google DataStore Emulator Test', () => {
+// google/cloud-sdk image run only on linux os
+envDescribe('Docker Container Google DataStore Emulator Test', () => {
   const emulatorDir = './emulator-test3';
 
   before((done) => {

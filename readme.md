@@ -5,7 +5,7 @@ Google Cloud Datastore Emulator
 
 This package helps to start / stop [Google Datatstore Emulator](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/datastore/) with javascript.
 From 1.1.0 also could usable with [google/cloud-sdk](https://hub.docker.com/r/google/cloud-sdk/) docker image. 
-The wrapper automatically pull the image is not exists on the host. 
+The wrapper automatically pull the image is not exists on the host, but I suggest to pull the image in the 'before_test' section in the CI script 
 **Important:** Be careful with the timeouts, need time to pull the image, start and stop the container.
 
 Perfect to support unit testing where the persistent layer is the gcloud Datastore.
