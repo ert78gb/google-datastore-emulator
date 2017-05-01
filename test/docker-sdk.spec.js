@@ -1,5 +1,6 @@
 'use strict';
 
+// google/cloud-sdk image run only on linux os
 const envDescribe = process.env.APPVEYOR === 'True' ? describe.skip : describe;
 
 const chai = require('chai');
@@ -18,7 +19,6 @@ const testData = {
   testProp: 'test-data'
 };
 
-// google/cloud-sdk image run only on linux os
 envDescribe('Docker Container Google DataStore Emulator Test', () => {
   const emulatorDir = './emulator-test3';
 
@@ -158,7 +158,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       })
   });
 
-  it.only('should start the emulator when set project Id and dataDir', () => {
+  it('should start the emulator when set project Id and dataDir', () => {
     const projectId = 'test3';
     const dataDir = emulatorDir;
 
