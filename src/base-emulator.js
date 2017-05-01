@@ -3,6 +3,7 @@ const DEV_APP_SERVER_RUNNING_KEY = '[datastore] Dev App Server is now running.';
 
 const EventEmitter = require('events');
 const fse = require('fs-extra');
+const path = require('path');
 
 const EmulatorStates = require('./emulator-states');
 
@@ -211,7 +212,7 @@ class BaseEmulator {
    */
   _createDataDirSync() {
     const self = this;
-    fse.ensureDir(this._options.dataDir, function (err) {
+    fse.ensureDir(path.join(this._options.dataDir, 'WEB-INF'), function (err) {
       /* istanbul ignore if */
       if (err)
         throw new Error(`Can not create datadir: ${self._options.dataDir}, error: ${err}`)
