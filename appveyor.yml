@@ -4,6 +4,9 @@ environment:
     - nodejs_version: "6"
     - nodejs_version: "7"
 
+image:
+  - Visual Studio 2017
+
 platform:
   - x86
   - x64
@@ -26,6 +29,8 @@ install:
   - gcloud.cmd components install cloud-datastore-emulator --quiet
   # Install node.js versions
   - ps: Install-Product node $env:nodejs_version $env:platform
+  # Pull google/cloud-sdk Docker image, but currently not supported
+  # - docker pull google/cloud-sdk
   # Install npm dependencies
   - npm install
 
