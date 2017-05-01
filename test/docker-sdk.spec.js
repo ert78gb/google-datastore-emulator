@@ -72,6 +72,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         return datastore.get(entityKey);
       })
       .then((result) => {
+      console.log('result', result);
         expect(result.length).to.be.equal(1);
         const entity = result[0];
         expect(entity).to.be.deep.equal(testData);
