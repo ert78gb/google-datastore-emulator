@@ -161,6 +161,8 @@ class BaseEmulator {
       params.push('--legacy')
     }
 
+    this._setConsistency(params);
+
     return params;
   }
 
@@ -182,6 +184,17 @@ class BaseEmulator {
    */
   _setDatadir /* istanbul ignore next */ (params) {
     throw new Error('_setDatadir method must be implement')
+  }
+
+  /**
+   * Depend from the engine how to set data directory for the emulator
+   * @param params
+   * @protected
+   * @abstract
+   */
+  _setConsistency(params) /* istanbul ignore next */ {
+    throw new Error('_setConsistency method must be implement')
+
   }
 
   /**

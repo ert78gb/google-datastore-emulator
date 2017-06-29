@@ -2,7 +2,7 @@
 
 // google/cloud-sdk image run only on linux os
 // TODO Turn off the test until the new Docker image issue will not solve
-const envDescribe = process.env.APPVEYOR === 'True' ? describe.skip : describe.skip;
+const envDescribe = process.env.APPVEYOR === 'True' ? describe.skip : describe;
 
 const chai = require('chai');
 const Emulator = require('../index');

@@ -1,6 +1,7 @@
 'use strict';
 
 const chai = require('chai');
+const Datastore = require('@google-cloud/datastore');
 const Emulator = require('../index');
 const fse = require('fs-extra');
 const nodeCleanup = require('node-cleanup');
@@ -342,4 +343,57 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         process.kill(process.pid);
       })
   })
+});
+
+describe('Consistency test', () => {
+  // Each test suite needs to have a unique folder.
+  let emulator;
+  let ds;
+
+  before(() => {
+    const options = {
+      consistency: 1.0,
+      port: 8082
+    };
+    emulator = new Emulator(options);
+    return emulator.start()
+      .then(() => {
+        // console.log('Emulator ready. Host: ', process.env.DATASTORE_EMULATOR_HOST);
+        ds = Datastore({
+          keyFilename: {},
+          projectId: 'test'
+        });
+        return true;
+      })
+  });
+
+  after(() => {
+    return emulator.stop();
+  });
+
+  describe('Test save', () => {
+    it.skip('Save promise should reject', () => {
+      const key = ds.key(['TestData1']);
+      const data = {
+        title: 'Test1'
+      };
+
+      return expect(ds.save({
+        key: key,
+        data: data
+      })).to.be.rejected;
+    });
+
+    it('Save promise should resolve', () => {
+      const key = ds.key(['TestData2']);
+      const data = {
+        title: 'Test2'
+      };
+
+      return expect(ds.save({
+        key: key,
+        data: data
+      })).to.be.fulfilled;
+    });
+  });
 });

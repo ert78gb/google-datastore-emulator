@@ -22,7 +22,7 @@
   "author": "Robert Kiss <ert78gb@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@google-cloud/datastore": "^1.0.1",
+    "@google-cloud/datastore": "^1.0.2",
     "dockerode": "^2.4.3",
     "fs-extra": "^2.0.0",
     "node-cleanup": "^2.1.2",

@@ -54,7 +54,7 @@ class LocallyInstalledSdk extends BaseEmulator{
   }
 
   /**
-   * Override the base class method. Redirect the emulator working directory
+   * Override the base class method. Redirect the emulator host-port settings
    * @param params
    * @protected
    */
@@ -73,6 +73,17 @@ class LocallyInstalledSdk extends BaseEmulator{
       params.push('--data-dir=' + this._options.dataDir);
     }
 
+  }
+
+  /**
+   * Override the base class method. Set the consistency level of the emulator
+   * @param params
+   * @protected
+   */
+  _setConsistency(params){
+    if (this._options.consistency) {
+      params.push(`--consistency="${this._options.consistency}"`)
+    }
   }
 
   _registerEmulatorListeners() {

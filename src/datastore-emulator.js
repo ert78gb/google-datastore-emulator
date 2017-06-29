@@ -8,7 +8,8 @@ const DEFAULT_OPTIONS = {
   useDocker: false,
   host:'localhost',
   port: 8081,
-  project:'test'
+  project:'test',
+  consistency: '1.0'
 };
 
 const nodeCleanup = require('node-cleanup');
