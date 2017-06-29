@@ -45,8 +45,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
     let entityKey;
 
     let options = {
-      debug: true,
-      port: 9090
+      debug: true
     };
 
     let emulator = new Emulator(options);
