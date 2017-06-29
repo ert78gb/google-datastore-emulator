@@ -334,7 +334,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
   });
 
   it('process.exit should kill child processes', function (done) {
-    this.timeout(10000);
+    this.timeout(15000);
 
     process.env.GCLOUD_PROJECT = 'test';
 
@@ -351,7 +351,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         nodeCleanup(() => {
           if (!calledDone) {
             calledDone = true;
-            setTimeout(done, 2000);
+            setTimeout(done, 5000);
           }
         });
 
