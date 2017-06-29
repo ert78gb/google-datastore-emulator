@@ -24,14 +24,14 @@
   "dependencies": {
     "@google-cloud/datastore": "^1.0.2",
     "dockerode": "^2.4.3",
-    "fs-extra": "^2.0.0",
+    "fs-extra": "^3.0.1",
     "node-cleanup": "^2.1.2",
     "tree-kill": "^1.1.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.41",
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
+    "chai": "^4.0.2",
+    "chai-as-promised": "^7.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "mocha-appveyor-reporter": "^0.4.0"
