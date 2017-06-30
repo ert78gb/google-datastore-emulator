@@ -17,3 +17,16 @@ before_install:
   - echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
   - sudo apt-get update && sudo apt-get install google-cloud-sdk google-cloud-sdk-datastore-emulator
   - docker pull google/cloud-sdk:latest
+  - 'if [ "${TRAVIS_NODE_VERSION:0:2}" = "8." ]; then
+        npm install -g greenkeeper-lockfile@1;
+    fi'
+
+before_script:
+  - 'if [ "${TRAVIS_NODE_VERSION:0:2}" = "8." ]; then
+        greenkeeper-lockfile-update;
+    fi'
+
+after_script:
+  - 'if [ "${TRAVIS_NODE_VERSION:0:2}" = "8." ]; then
+        greenkeeper-lockfile-upload;
+    fi'
