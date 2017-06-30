@@ -70,7 +70,8 @@ port (number) | 8081 | If it is empty the emulator selects a random free port.
 debug (boolean) | false | If it is true, it writes the console.logs of the emulator onto the main process console.
 legacy (boolean) | false | If it is true, it supports Cloud Datastore API v1beta2.
 consistency (string) | '1.0' | The consistency level of the Datastore Emulator. [More details](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/datastore/start) 
-useDocker (boolean) | false | If it is true, it use [google/cloud-sdk](https://hub.docker.com/r/google/cloud-sdk/) docker image to run emulator instead of locally installed version.
+useDocker (boolean) | false | If it is true, it use docker image to run emulator instead of locally installed version.
+dockerImage (string) | 'google/cloud-sdk:latest' | This image will be use by docker. The default: [google/cloud-sdk:latest](https://hub.docker.com/r/google/cloud-sdk/) docker image to run emulator instead of locally installed version.
 
 ## Methods
 

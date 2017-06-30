@@ -115,7 +115,7 @@ class DockerSdk extends BaseEmulator {
   _pullImage() {
     const self = this;
     return new Promise((resolve, reject)=>{
-      self._docker.pull('google/cloud-sdk:latest', function(err, stream) {
+      self._docker.pull(self._options.dockerImage, function(err, stream) {
 
         self._docker.modem.followProgress(stream, onFinished, onProgress);
 

@@ -9,7 +9,8 @@ const DEFAULT_OPTIONS = {
   host:'localhost',
   port: 8081,
   project:'test',
-  consistency: '1.0'
+  consistency: '1.0',
+  dockerImage: 'google/cloud-sdk:latest'
 };
 
 const nodeCleanup = require('node-cleanup');
