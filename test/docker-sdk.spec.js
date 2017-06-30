@@ -333,7 +333,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       .then(emulator.stop.bind(emulator));
   });
 
-  it('process.exit should kill child processes', function (done) {
+  it.skip('process.exit should kill child processes', function (done) {
     this.timeout(15000);
 
     process.env.GCLOUD_PROJECT = 'test';
