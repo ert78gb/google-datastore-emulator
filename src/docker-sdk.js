@@ -43,7 +43,7 @@ class DockerSdk extends BaseEmulator {
         .then(() => {
           return self._docker.createContainer({
             Hostname: EMULATOR_HOST_NAME,
-            Image: 'google/cloud-sdk',
+            Image: self._options.dockerImage,
             AttachStdin: false,
             AttachStdout: true,
             AttachStderr: true,
