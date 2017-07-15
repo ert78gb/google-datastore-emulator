@@ -1,6 +1,6 @@
 {
   "name": "google-datastore-emulator",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "NodeJs wrapper to google datastore emulator. It could start and stop emulator as node module",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "author": "Robert Kiss <ert78gb@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@google-cloud/datastore": "^1.0.2",
+    "@google-cloud/datastore": "^1.0.4",
     "dockerode": "^2.4.3",
     "fs-extra": "^4.0.0",
     "node-cleanup": "^2.1.2",
@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "@types/mocha": "^2.2.41",
-    "chai": "^4.0.2",
-    "chai-as-promised": "^7.0.0",
+    "chai": "^4.1.0",
+    "chai-as-promised": "^7.1.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "mocha-appveyor-reporter": "^0.4.0"
