@@ -78,7 +78,7 @@ interface Options {
 }
 
 declare class DataStoreEmulator {
-  constructor(options: Options);
+  constructor(options?: Options);
   start(): Promise<void>;
   stop(): Promise<void>;
 }
