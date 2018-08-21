@@ -30,3 +30,7 @@ after_script:
   - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ]; then
         greenkeeper-lockfile-upload;
     fi'
+
+install:
+  - npm install
+  - npm install --no-save @google-cloud/datastore
