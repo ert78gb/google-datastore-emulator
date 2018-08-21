@@ -1,9 +1,8 @@
 environment:
   GC_PATH: 'C:\CloudSDK'
   matrix:
-    - nodejs_version: "6"
-    - nodejs_version: "7"
     - nodejs_version: "8"
+    - nodejs_version: "10"
 
 image:
   - Visual Studio 2017
@@ -34,6 +33,7 @@ install:
   # - docker pull google/cloud-sdk
   # Install npm dependencies
   - npm install
+  - npm install --no-save @google-cloud/datastore
 
 # Post-install test scripts.
 test_script:
