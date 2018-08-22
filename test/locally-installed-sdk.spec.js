@@ -108,7 +108,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
 
   });
 
-  it('should start the emulator when set project Id', () => {
+  it.skip('should start the emulator when set project Id', () => {
     const projectId = 'test2';
     let entityKey;
 
@@ -151,7 +151,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       })
   });
 
-  it('should start the emulator when set project Id and dataDir', () => {
+  it.skip('should start the emulator when set project Id and dataDir', () => {
     const projectId = 'test3';
     const dataDir = emulatorDir;
 
