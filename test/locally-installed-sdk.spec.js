@@ -205,7 +205,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       })
   });
 
-  it('should start the emulator with specified host and port', () => {
+  it.skip('should start the emulator with specified host and port', () => {
     process.env.GCLOUD_PROJECT = 'test';
     let entityKey;
 
@@ -245,7 +245,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       })
   });
 
-  it('should start the emulator on localhost when specified only port', () => {
+  it.skip('should start the emulator on localhost when specified only port', () => {
     process.env.GCLOUD_PROJECT = 'test';
     let entityKey;
 
