@@ -17,6 +17,7 @@ before_install:
   - sudo apt-get update && sudo apt-get install google-cloud-sdk google-cloud-sdk-datastore-emulator
   - docker pull google/cloud-sdk:206.0.0
   - printenv
+  - java -version
   - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ]; then
         npm install -g greenkeeper-lockfile@1;
     fi'
