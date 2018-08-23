@@ -8,8 +8,7 @@ services:
 language: node_js
 node_js:
   - "8"
-  - "6"
-  - "7"
+  - "10"
 
 before_install:
   - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -18,6 +17,7 @@ before_install:
   - sudo apt-get update && sudo apt-get install google-cloud-sdk google-cloud-sdk-datastore-emulator
   - docker pull google/cloud-sdk:latest
   - printenv
+  - java -version
   - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ]; then
         npm install -g greenkeeper-lockfile@1;
     fi'
@@ -31,3 +31,7 @@ after_script:
   - 'if [ "${TRAVIS_NODE_VERSION}" = "8" ]; then
         greenkeeper-lockfile-upload;
     fi'
+
+install:
+  - npm install
+  - npm install --no-save @google-cloud/datastore
