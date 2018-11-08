@@ -34,9 +34,9 @@ class DockerSdk extends BaseEmulator {
       const bind = [];
 
       // If data directory set then map the local directory to the container directory
-      if(self._options.dataDir){
+      if (self._options.dataDir) {
         const abs = path.resolve(self._options.dataDir);
-        bind.push(abs+':/.config/gcloud/emulators/datastore');
+        bind.push(abs + ':/.config/gcloud/emulators/datastore');
       }
 
       self._pullImage()
@@ -70,7 +70,7 @@ class DockerSdk extends BaseEmulator {
           self._container = container;
 
           // attach streams to the container
-          container.attach({stream: true, stdout: true, stderr: true}, function (err, stream) {
+          container.attach({ stream: true, stdout: true, stderr: true }, function (err, stream) {
             /* istanbul ignore if */
             if (err)
               return reject(err);
@@ -97,13 +97,16 @@ class DockerSdk extends BaseEmulator {
     if (this._state !== EmulatorStates.RUNNING || !this._container)
       return Promise.resolve();
 
-    return new Promise((resolve) => {
-      super._stop(resolve);
+    return new Promise((resolve, reject) => {
+      super._stop()
+        .then(resolve)
+        .catch(reject);
 
       this._container.stop()
         .then(() => {
           this._setState(EmulatorStates.EXIT, 0);
-        });
+        })
+        .catch(reject);
     })
   }
 
@@ -114,18 +117,19 @@ class DockerSdk extends BaseEmulator {
    */
   _pullImage() {
     const self = this;
-    return new Promise((resolve, reject)=>{
-      self._docker.pull(self._options.dockerImage, function(err, stream) {
+    return new Promise((resolve, reject) => {
+      self._docker.pull(self._options.dockerImage, function (err, stream) {
 
         self._docker.modem.followProgress(stream, onFinished, onProgress);
 
         function onFinished(err, output) {
           self._writeDebug(output);
 
-          if(err) return reject(err);
+          if (err) return reject(err);
 
           return resolve();
         }
+
         function onProgress(event) {
           self._writeDebug(event);
         }
@@ -139,8 +143,8 @@ class DockerSdk extends BaseEmulator {
    * @param params
    * @protected
    */
-  _setHostPort(params){
-      params.push(`--host-port=${EMULATOR_HOST_NAME}:${EMULATOR_PORT}`);
+  _setHostPort(params) {
+    params.push(`--host-port=${EMULATOR_HOST_NAME}:${EMULATOR_PORT}`);
   }
 
   /**
@@ -156,7 +160,7 @@ class DockerSdk extends BaseEmulator {
    * @param params
    * @protected
    */
-  _setConsistency(params){
+  _setConsistency(params) {
     if (this._options.consistency) {
       params.push(`--consistency=${this._options.consistency}`)
     }

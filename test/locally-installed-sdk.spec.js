@@ -53,7 +53,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
     return emulator.start()
       .then(() => {
         const datastore = require('@google-cloud/datastore')();
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
           data: testData
@@ -108,7 +108,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
 
   });
 
-  it.skip('should start the emulator when set project Id', () => {
+  it('should start the emulator when set project Id', () => {
     const projectId = 'test2';
     let entityKey;
 
@@ -124,7 +124,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         const datastore = require('@google-cloud/datastore')({
           projectId
         });
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
           data: testData
@@ -151,7 +151,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       })
   });
 
-  it.skip('should start the emulator when set project Id and dataDir', () => {
+  it('should start the emulator when set project Id and dataDir', () => {
     const projectId = 'test3';
     const dataDir = emulatorDir;
 
@@ -175,7 +175,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         const datastore = require('@google-cloud/datastore')({
           projectId
         });
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
           data: testData
@@ -205,7 +205,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       })
   });
 
-  it.skip('should start the emulator with specified host and port', () => {
+  it('should start the emulator with specified host and port', () => {
     process.env.GCLOUD_PROJECT = 'test';
     let entityKey;
 
@@ -222,7 +222,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`${options.host}:${options.port}`);
         const datastore = require('@google-cloud/datastore')();
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
           data: testData
@@ -245,7 +245,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       })
   });
 
-  it.skip('should start the emulator on localhost when specified only port', () => {
+  it('should start the emulator on localhost when specified only port', () => {
     process.env.GCLOUD_PROJECT = 'test';
     let entityKey;
 
@@ -261,7 +261,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`localhost:${options.port}`);
         const datastore = require('@google-cloud/datastore')();
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
           data: testData
@@ -345,11 +345,21 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
   });
 
   it('should start after stop', async () => {
-    const emulator = new Emulator();
-    await emulator.start();
-    await emulator.stop();
-    await emulator.start();
-    await emulator.stop();
+    const options = {
+      debug: true
+    };
+    const emulator = new Emulator(options);
+
+    try {
+      await emulator.start();
+      await emulator.stop();
+      await emulator.start();
+    } catch (error) {
+      console.error('start-stop-start error:', error);
+      expect(error).to.not.be.ok;
+    } finally {
+      await emulator.stop();
+    }
   })
 });
 
