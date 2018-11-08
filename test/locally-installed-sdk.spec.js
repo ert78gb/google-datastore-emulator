@@ -342,6 +342,14 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
 
         process.kill(process.pid);
       })
+  });
+
+  it('should start after stop', async () => {
+    const emulator = new Emulator();
+    await emulator.start();
+    await emulator.stop();
+    await emulator.start();
+    await emulator.stop();
   })
 });
 

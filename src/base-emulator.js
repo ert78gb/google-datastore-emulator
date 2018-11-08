@@ -68,6 +68,7 @@ class BaseEmulator {
       removeStopListeners();
       self._removeEmulatorListeners();
       return self._clean()
+        .then(() => self._state = undefined)
         .then(resolve);
     }
 
@@ -172,7 +173,7 @@ class BaseEmulator {
    * @protected
    * @abstract
    */
-  _setHostPort /* istanbul ignore next */ (params) {
+  _setHostPort /* istanbul ignore next */(params) {
     throw new Error('_setHostPort method must be implement')
   }
 
@@ -182,7 +183,7 @@ class BaseEmulator {
    * @protected
    * @abstract
    */
-  _setDatadir /* istanbul ignore next */ (params) {
+  _setDatadir /* istanbul ignore next */(params) {
     throw new Error('_setDatadir method must be implement')
   }
 
