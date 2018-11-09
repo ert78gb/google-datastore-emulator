@@ -9,7 +9,7 @@ const BaseEmulator = require('./base-emulator');
 /**
  * Wrapper for the locally installed SDK
  */
-class LocallyInstalledSdk extends BaseEmulator{
+class LocallyInstalledSdk extends BaseEmulator {
   constructor(options) {
     super(options);
     this._emulator = null;
@@ -30,7 +30,7 @@ class LocallyInstalledSdk extends BaseEmulator{
       super._start(resolve, reject);
 
       const params = this._getCommandParameters();
-      self._emulator = spawn('gcloud', params, {shell: true});
+      self._emulator = spawn('gcloud', params, { shell: true });
 
       self._registerEmulatorListeners();
     })
@@ -46,8 +46,11 @@ class LocallyInstalledSdk extends BaseEmulator{
     if (this._state !== EmulatorStates.RUNNING)
       return Promise.resolve();
 
-    return new Promise((resolve) => {
-      super._stop(resolve);
+    return new Promise((resolve, reject) => {
+
+    super._stop()
+      .then(resolve)
+      .catch(reject);
 
       kill(this._emulator.pid);
     })
@@ -58,8 +61,8 @@ class LocallyInstalledSdk extends BaseEmulator{
    * @param params
    * @protected
    */
-  _setHostPort(params){
-      params.push(`--host-port=${this._options.host}:${this._options.port}`);
+  _setHostPort(params) {
+    params.push(`--host-port=${this._options.host}:${this._options.port}`);
   }
 
   /**
@@ -67,7 +70,7 @@ class LocallyInstalledSdk extends BaseEmulator{
    * @param params
    * @protected
    */
-  _setDatadir(params){
+  _setDatadir(params) {
     if (this._options.dataDir) {
       this._createDataDirSync();
       params.push('--data-dir=' + this._options.dataDir);
@@ -80,7 +83,7 @@ class LocallyInstalledSdk extends BaseEmulator{
    * @param params
    * @protected
    */
-  _setConsistency(params){
+  _setConsistency(params) {
     if (this._options.consistency) {
       params.push(`--consistency="${this._options.consistency}"`)
     }
@@ -99,15 +102,15 @@ class LocallyInstalledSdk extends BaseEmulator{
   }
 
   _removeEmulatorListeners() {
-    this._emulator.stdout.removeListener('data', this._emulatorStdOutListener.bind(this));
+    this._emulator.stdout.removeAllListeners('data');
 
-    this._emulator.stderr.removeListener('data', this._emulatorStdErrListener.bind(this));
+    this._emulator.stderr.removeAllListeners('data');
 
-    this._emulator.removeListener('close', this._emulatorCloseListener.bind(this));
+    this._emulator.removeAllListeners('close');
 
-    this._emulator.removeListener('exit', this._emulatorExitListener.bind(this));
+    this._emulator.removeAllListeners('exit');
 
-    this._emulator.removeListener('error', this._emulatorErrorListener.bind(this));
+    this._emulator.removeAllListeners('error');
 
   }
 

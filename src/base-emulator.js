@@ -40,14 +40,14 @@ class BaseEmulator {
     }
 
     function removeStartListeners() {
-      self._stateEmitter.removeListener(EmulatorStates.RUNNING, startSuccessListener.bind(this));
+      self._stateEmitter.removeListener(EmulatorStates.RUNNING, startSuccessListener);
 
-      self._stateEmitter.removeListener(EmulatorStates.CLOSE, startRejectListener.bind(this));
+      self._stateEmitter.removeListener(EmulatorStates.CLOSE, startRejectListener);
     }
 
-    self._stateEmitter.on(EmulatorStates.RUNNING, startSuccessListener.bind(this));
+    self._stateEmitter.on(EmulatorStates.RUNNING, startSuccessListener);
 
-    self._stateEmitter.on(EmulatorStates.CLOSE, startRejectListener.bind(this));
+    self._stateEmitter.on(EmulatorStates.CLOSE, startRejectListener);
   }
 
   /**
@@ -55,31 +55,40 @@ class BaseEmulator {
    * @param resolve Promise.resolve callback
    * @private
    */
-  _stop(resolve) {
+  _stop() {
     const self = this;
+    return new Promise((resolve, reject) => {
 
-    let resolved = false;
+      self._setState(EmulatorStates.STOPPING);
+      let resolved = false;
 
-    function stopListener() {
-      if (resolved)
-        return;
+      function stopListener() {
+        if (resolved)
+          return;
 
-      resolved = true;
-      removeStopListeners();
-      self._removeEmulatorListeners();
-      return self._clean()
-        .then(resolve);
-    }
+        resolved = true;
+        removeStopListeners();
+        self._removeEmulatorListeners();
+        return self._clean()
+          .then(() => {
+            self._setState(undefined);
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      }
 
-    function removeStopListeners() {
-      self._stateEmitter.removeListener(EmulatorStates.EXIT, stopListener.bind(this));
+      function removeStopListeners() {
+        self._stateEmitter.removeListener(EmulatorStates.EXIT, stopListener);
 
-      self._stateEmitter.removeListener(EmulatorStates.CLOSE, stopListener.bind(this));
-    }
+        self._stateEmitter.removeListener(EmulatorStates.CLOSE, stopListener);
+      }
 
-    this._stateEmitter.on(EmulatorStates.EXIT, stopListener.bind(this));
+      self._stateEmitter.on(EmulatorStates.EXIT, stopListener);
 
-    this._stateEmitter.on(EmulatorStates.CLOSE, stopListener.bind(this));
+      self._stateEmitter.on(EmulatorStates.CLOSE, stopListener);
+    })
   }
 
   /**
@@ -172,7 +181,7 @@ class BaseEmulator {
    * @protected
    * @abstract
    */
-  _setHostPort /* istanbul ignore next */ (params) {
+  _setHostPort /* istanbul ignore next */(params) {
     throw new Error('_setHostPort method must be implement')
   }
 
@@ -182,7 +191,7 @@ class BaseEmulator {
    * @protected
    * @abstract
    */
-  _setDatadir /* istanbul ignore next */ (params) {
+  _setDatadir /* istanbul ignore next */(params) {
     throw new Error('_setDatadir method must be implement')
   }
 
