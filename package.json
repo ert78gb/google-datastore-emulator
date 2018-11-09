@@ -1,13 +1,14 @@
 {
   "name": "google-datastore-emulator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "NodeJs wrapper to google datastore emulator. It could start and stop emulator as node module",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "mocha --ui bdd test/**/*.spec.js --timeout 120000",
     "test:appveyor": "mocha --reporter mocha-appveyor-reporter --reporter-options appveyorBatchSize=1 --ui bdd test/**/*.spec.js --timeout 120000",
-    "coverage": "istanbul cover node_modules/.bin/_mocha -- --ui bdd test/**/*.spec.js --timeout 120000"
+    "coverage": "istanbul cover node_modules/.bin/_mocha -- --ui bdd test/**/*.spec.js --timeout 120000",
+    "release": "standard-version"
   },
   "keywords": [
     "google",
@@ -34,7 +35,8 @@
     "chai-as-promised": "^7.1.1",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
-    "mocha-appveyor-reporter": "^0.4.1"
+    "mocha-appveyor-reporter": "^0.4.1",
+    "standard-version": "^4.4.0"
   },
   "peerDependencies": {
     "@google-cloud/datastore": "^1.0.0"
