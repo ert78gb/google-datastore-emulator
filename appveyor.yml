@@ -38,7 +38,7 @@ install:
   # - docker pull google/cloud-sdk
   # Install npm dependencies
   - npm install
-  - npm install --no-save $env:DATA_STORE_VERSION
+  - npm install --no-save %DATA_STORE_VERSION%
 
 # Post-install test scripts.
 test_script:
