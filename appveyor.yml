@@ -2,9 +2,9 @@ environment:
   GC_PATH: 'C:\CloudSDK'
   matrix:
     - nodejs_version: "8"
-      DATA_STORE_VERSION:"@google-cloud/datastore@1"
+      DATA_STORE_VERSION: "@google-cloud/datastore@1"
     - nodejs_version: "10"
-      DATA_STORE_VERSION:"@google-cloud/datastore@2"
+      DATA_STORE_VERSION: "@google-cloud/datastore@2"
 
 image:
   - Visual Studio 2017
