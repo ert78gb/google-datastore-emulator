@@ -4,7 +4,7 @@ interface Options {
    *
    * This variable is datastore project Id. If it is empty, GCLOUD_PROJECT environment variable will be used. Either you should set it directly or the environment variable should be set.
    */
-  projectId?: string;
+  project?: string;
 
   /**
    * Default: false
