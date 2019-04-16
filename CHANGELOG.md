@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/ert78gb/google-datastore-emulator/compare/v2.1.0...v2.1.1) (2019-04-16)
+
+
+### Bug Fixes
+
+* rename the projectId to project in the TS definitions ([b98b77c](https://github.com/ert78gb/google-datastore-emulator/commit/b98b77c))
+
+
+
 <a name="2.1.0"></a>
 # 2.1.0 (2018-11-11)
 
