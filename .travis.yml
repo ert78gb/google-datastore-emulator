@@ -10,10 +10,6 @@ node_js:
   - "8"
   - "10"
 
-env:
-  - DATA_STORE_VERSION="@google-cloud/datastore@1"
-  - DATA_STORE_VERSION="@google-cloud/datastore@2"
-
 before_install:
   - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
   - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
