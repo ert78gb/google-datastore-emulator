@@ -82,7 +82,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
     console.log = function (d) {
       process.stdout.write(d + '\n');
 
-      if (!d)
+      if (!d  || !d.indexOf)
         return;
 
       if (d.indexOf('[datastore]') > -1) {
