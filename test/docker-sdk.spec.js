@@ -10,6 +10,7 @@ const fs = require('fs');
 const fse = require('fs-extra');
 const nodeCleanup = require('node-cleanup');
 const path = require('path');
+const { Datastore } = require('@google-cloud/datastore');
 
 chai.use(require("chai-as-promised"));
 
@@ -58,7 +59,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
     return emulator.start()
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
         entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
         const testEntity = {
           key: entityKey,
@@ -68,7 +69,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
 
         return datastore.get(entityKey);
       })
@@ -88,7 +89,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
     console.log = function (d) {
       process.stdout.write(d + '\n');
 
-      if (!d)
+      if (!d || !d.indexOf)
         return;
 
       if (d.indexOf('[datastore]') > -1) {
@@ -129,7 +130,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
     return emulator.start()
       .then(() => {
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
         entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
@@ -141,7 +142,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
 
@@ -182,7 +183,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         expect(testUtil.fileExists(file)).to.be.equal(true);
 
 
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
         entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
@@ -194,7 +195,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
 
@@ -232,7 +233,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       .then(() => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`${options.host}:${options.port}`);
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
         entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
         const testEntity = {
           key: entityKey,
@@ -242,7 +243,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
 
         return datastore.get(entityKey);
       })
@@ -272,7 +273,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       .then(() => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`localhost:${options.port}`);
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
         entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
         const testEntity = {
           key: entityKey,
@@ -282,7 +283,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
 
         return datastore.get(entityKey);
       })
