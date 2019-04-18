@@ -1,6 +1,6 @@
 {
   "name": "google-datastore-emulator",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "NodeJs wrapper to google datastore emulator. It could start and stop emulator as node module",
   "main": "index.js",
   "types": "index.d.ts",

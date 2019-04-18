@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/ert78gb/google-datastore-emulator/compare/v2.1.1...v2.2.0) (2019-04-18)
+
+
+### Bug Fixes
+
+* catch docker pull errors ([906a2a6](https://github.com/ert78gb/google-datastore-emulator/commit/906a2a6))
+
+
+### Features
+
+* support [@google-cloud](https://github.com/google-cloud)/datastore v3 ([#35](https://github.com/ert78gb/google-datastore-emulator/issues/35)) ([f7b4ae2](https://github.com/ert78gb/google-datastore-emulator/commit/f7b4ae2))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/ert78gb/google-datastore-emulator/compare/v2.1.0...v2.1.1) (2019-04-16)
 
