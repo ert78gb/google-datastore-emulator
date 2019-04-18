@@ -1,7 +1,7 @@
 'use strict';
 
 const chai = require('chai');
-const Datastore = require('@google-cloud/datastore');
+const { Datastore } = require('@google-cloud/datastore');
 const Emulator = require('../index');
 const fse = require('fs-extra');
 const nodeCleanup = require('node-cleanup');
@@ -52,7 +52,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
 
     return emulator.start()
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
         entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
@@ -62,7 +62,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
 
         return datastore.get(entityKey);
       })
@@ -82,7 +82,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
     console.log = function (d) {
       process.stdout.write(d + '\n');
 
-      if (!d)
+      if (!d  || !d.indexOf)
         return;
 
       if (d.indexOf('[datastore]') > -1) {
@@ -121,7 +121,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
 
     return emulator.start()
       .then(() => {
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
         entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
@@ -133,7 +133,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
 
@@ -172,7 +172,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         let file = path.join(dataDir, 'env.yaml');
         expect(testUtil.fileExists(file)).to.be.equal(true);
 
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
         entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
@@ -184,7 +184,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')({
+        const datastore = new Datastore({
           projectId
         });
 
@@ -221,7 +221,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       .then(() => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`${options.host}:${options.port}`);
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
         entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
@@ -231,7 +231,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
 
         return datastore.get(entityKey);
       })
@@ -260,7 +260,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       .then(() => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`localhost:${options.port}`);
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
         entityKey = datastore.key({ namespace: 'test-ns', path: ['test-path'] });
         const testEntity = {
           key: entityKey,
@@ -270,7 +270,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         return datastore.save(testEntity);
       })
       .then(() => {
-        const datastore = require('@google-cloud/datastore')();
+        const datastore = new Datastore();
 
         return datastore.get(entityKey);
       })
@@ -377,7 +377,7 @@ describe('Consistency test', () => {
     return emulator.start()
       .then(() => {
         // console.log('Emulator ready. Host: ', process.env.DATASTORE_EMULATOR_HOST);
-        ds = Datastore({
+        ds = new Datastore({
           keyFilename: {},
           projectId: 'test'
         });

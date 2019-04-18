@@ -8,6 +8,9 @@ environment:
 image:
   - Visual Studio 2017
 
+matrix:
+  fast_finish: true
+
 platform:
   - x86
   - x64
@@ -47,8 +50,6 @@ test_script:
 
 # Don't actually build.
 build: off
-matrix:
-  fast_finish: true
 # Access to VM via RDP
 #on_finish:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
