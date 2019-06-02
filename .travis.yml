@@ -10,6 +10,7 @@ node_js:
   - "8"
   - "10"
   - "11"
+  - "12"
 
 before_install:
   - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -19,17 +20,17 @@ before_install:
   - docker pull google/cloud-sdk:latest
   - printenv
   - java -version
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "10" ]; then
+  - 'if [ "${TRAVIS_NODE_VERSION}" = "12" ]; then
         npm install -g greenkeeper-lockfile@1;
     fi'
 
 before_script:
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "10" ]; then
+  - 'if [ "${TRAVIS_NODE_VERSION}" = "12" ]; then
         greenkeeper-lockfile-update;
     fi'
 
 after_script:
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "10" ]; then
+  - 'if [ "${TRAVIS_NODE_VERSION}" = "12" ]; then
         greenkeeper-lockfile-upload;
     fi'
 
