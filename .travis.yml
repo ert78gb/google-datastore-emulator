@@ -11,6 +11,10 @@ node_js:
   - "10"
   - "11"
 
+env:
+  - DATASTORE=@google-cloud/datastore@3
+  - DATASTORE=@google-cloud/datastore@4
+
 before_install:
   - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
   - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
@@ -35,4 +39,4 @@ after_script:
 
 install:
   - npm install
-  - npm install --no-save @google-cloud/datastore
+  - npm install --no-save $DATASTORE
