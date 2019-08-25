@@ -48,11 +48,14 @@ class LocallyInstalledSdk extends BaseEmulator {
 
     return new Promise((resolve, reject) => {
 
-    super._stop()
-      .then(resolve)
-      .catch(reject);
+      super._stop()
+        .then(resolve)
+        .catch(reject);
 
-      kill(this._emulator.pid);
+      kill(this._emulator.pid, err => {
+        if (err)
+          return reject(err);
+      })
     })
   }
 
@@ -75,7 +78,6 @@ class LocallyInstalledSdk extends BaseEmulator {
       this._createDataDirSync();
       params.push('--data-dir=' + this._options.dataDir);
     }
-
   }
 
   /**
