@@ -79,6 +79,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
   it('should not write to console if debug=false', () => {
     process.env.GCLOUD_PROJECT = 'test';
     let wroteDataStore = false;
+    const originalConsoleLog = console.log;
     console.log = function (d) {
       process.stdout.write(d + '\n');
 
@@ -101,7 +102,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
         return emulator.stop();
       })
       .then(() => {
-        delete console.log;
+        console.log = originalConsoleLog;
         expect(wroteDataStore).to.be.equal(false);
         process.env.GCLOUD_PROJECT = null;
       })
