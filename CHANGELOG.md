@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.2](https://github.com/ert78gb/google-datastore-emulator/compare/v2.2.1...v2.2.2) (2019-09-05)
+
+
+### Bug Fixes
+
+* --legacy parameter is deprecated by Google ([8058273](https://github.com/ert78gb/google-datastore-emulator/commit/8058273))
+
 ### [2.2.1](https://github.com/ert78gb/google-datastore-emulator/compare/v2.2.0...v2.2.1) (2019-08-25)
 
 
