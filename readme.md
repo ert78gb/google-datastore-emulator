@@ -2,7 +2,6 @@ Google Cloud Datastore Emulator
 ===============================
 
 [![Build Status](https://travis-ci.org/ert78gb/google-datastore-emulator.svg?branch=master)](https://travis-ci.org/ert78gb/google-datastore-emulator)
-[![Greenkeeper badge](https://badges.greenkeeper.io/ert78gb/google-datastore-emulator.svg)](https://greenkeeper.io/)
 
 This package helps to start / stop [Google Datatstore Emulator](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/datastore/) with javascript.
 From 1.1.0 also could usable with [google/cloud-sdk](https://hub.docker.com/r/google/cloud-sdk/) docker image. 
