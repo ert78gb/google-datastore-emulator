@@ -2,7 +2,6 @@
 
 const DEFAULT_OPTIONS = {
   storeOnDisk: false,
-  legacy: false,
   clean: true,
   debug: false,
   useDocker: false,

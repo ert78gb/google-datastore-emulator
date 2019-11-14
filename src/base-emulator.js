@@ -165,11 +165,6 @@ class BaseEmulator {
       params.push('--no-store-on-disk')
     }
 
-    if (this._options.legacy) {
-      console.warn('"legacy" parameter is deprecated by Google. It will be removed in early October 2019')
-      params.push('--legacy')
-    }
-
     this._setConsistency(params);
 
     return params;

@@ -49,13 +49,6 @@ interface Options {
   debug?: boolean;
 
   /**
-   * Default: false
-   *
-   * If it is true, it supports Cloud Datastore API v1beta2.
-   */
-  legacy?: boolean;
-
-  /**
    * Default: '1.0'
    *
    * The consistency level of the Datastore Emulator. [More details](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/datastore/start)
