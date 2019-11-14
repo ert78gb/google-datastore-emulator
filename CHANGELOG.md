@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v2.2.2...v3.0.0) (2019-11-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* The legacy protocol support was removed from Cloud SDK 267.0.0
+
+### Features
+
+* remove 'legacy' parameter ([80d1c7e](https://github.com/ert78gb/google-datastore-emulator/commit/80d1c7e0222bccf64297755ddd449effff76f8d2))
+
 ### [2.2.2](https://github.com/ert78gb/google-datastore-emulator/compare/v2.2.1...v2.2.2) (2019-09-05)
 
 
