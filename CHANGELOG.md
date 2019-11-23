@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/ert78gb/google-datastore-emulator/compare/v3.0.0...v3.0.1) (2019-11-23)
+
+
+### Bug Fixes
+
+* allow @google-cloud/datastore@5.x ([9622751](https://github.com/ert78gb/google-datastore-emulator/commit/9622751292754a788bdffd8f0c51c580d7f9dd0a))
+
 ## [3.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v2.2.2...v3.0.0) (2019-11-14)
 
 
