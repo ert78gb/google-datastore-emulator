@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.2](https://github.com/ert78gb/google-datastore-emulator/compare/v3.0.1...v3.0.2) (2020-02-16)
+
+
+### Bug Fixes
+
+* upgrade tree-kill => 1.2.2 ([cc1a9c5](https://github.com/ert78gb/google-datastore-emulator/commit/cc1a9c554a7c90ca8110b0c05745a52c5f5db240))
+
 ### [3.0.1](https://github.com/ert78gb/google-datastore-emulator/compare/v3.0.0...v3.0.1) (2019-11-23)
 
 
