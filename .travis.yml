@@ -10,7 +10,7 @@ node_js:
   - "8"
   - "10"
   - "12"
-  - "13"
+  - "14"
 
 env:
   - DATASTORE=@google-cloud/datastore@3
@@ -24,19 +24,6 @@ before_install:
   - docker pull google/cloud-sdk:latest
   - printenv
   - java -version
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "12" ]; then
-        npm install -g greenkeeper-lockfile@1;
-    fi'
-
-before_script:
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "12" ]; then
-        greenkeeper-lockfile-update;
-    fi'
-
-after_script:
-  - 'if [ "${TRAVIS_NODE_VERSION}" = "12" ]; then
-        greenkeeper-lockfile-upload;
-    fi'
 
 install:
   - npm install
