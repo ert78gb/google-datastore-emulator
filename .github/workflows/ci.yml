@@ -64,14 +64,15 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Download GoogleCloudSDKInstaller.exe
-        run: (new-object System.Net.WebClient).DownloadFile('https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe','GoogleCloudSDKInstaller.exe')
+        run: (new-object System.Net.WebClient).DownloadFile('https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe','c:\temp\GoogleCloudSDKInstaller.exe')
         shell: powershell
 
       - name: Install Gloud SDK locally
         run: |
-          GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=%GC_PATH%
+          c:\temp\GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=%GC_PATH%
           SET PATH=%PATH%;%GC_PATH%\google-cloud-sdk\;%GC_PATH%\google-cloud-sdk\bin\
           gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
+        shell: cmd
 
       - name: Install dependencies
         run: npm install
