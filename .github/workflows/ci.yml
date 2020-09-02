@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: Test on Linux
+    name: Test on Linux with Node ${{ matrix.node }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -26,10 +26,15 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Docker pull google/cloud-sdk:latest
-        run: docker pull google/cloud-sdk:latest
+        run: docker pull --quiet google/cloud-sdk:latest
 
       - name: Install locally the Gloud sdk
-        run: sudo sh ./scripts/install-cloud-sdk.sh
+        run: |
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+          echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          sudo apt-get update -qq
+          sudo apt-get install -qq google-cloud-sdk google-cloud-sdk-datastore-emulator
 
       - name: Install dependencies
         run: npm install
