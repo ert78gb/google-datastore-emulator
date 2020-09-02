@@ -77,12 +77,17 @@ jobs:
       - name: Add C:/CloudSDK/google-cloud-sdk/bin to the path
         run: echo "::add-path::C:/CloudSDK/google-cloud-sdk/bin/"
 
-      - name: Read CLOUDSDK_PYTHON
-        run: echo ::set-output name=NVMRC::$(gcloud.cmd components copy-bundled-python)
-#          gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
-#          gcloud.cmd components update
-#          gcloud.cmd components install beta
-#          gcloud.cmd components install cloud-datastore-emulator
+      - name: Set CLOUDSDK_PYTHON env
+        run: echo ::set-env name=CLOUDSDK_PYTHON::$(gcloud.cmd components copy-bundled-python)
+
+      - name: Update GCloud Components
+        run: gcloud.cmd components update
+
+      - name: Install GCloud beta
+        run: gcloud.cmd components install beta
+
+      - name: Install cloud-datastore-emulator
+        run: gcloud.cmd components install cloud-datastore-emulator
 
       - name: Install dependencies
         run: npm install
