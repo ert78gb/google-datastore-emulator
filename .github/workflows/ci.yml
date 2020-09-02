@@ -78,7 +78,7 @@ jobs:
         run: echo "::add-path::C:/CloudSDK/google-cloud-sdk/bin/"
 
       - name: Set CLOUDSDK_PYTHON env
-        run: echo ::set-env name=CLOUDSDK_PYTHON::$(gcloud.cmd components copy-bundled-python)
+        run: echo "::set-env name=CLOUDSDK_PYTHON::$(gcloud.cmd components copy-bundled-python)"
 
       - name: Update GCloud Components
         run: gcloud.cmd components update
