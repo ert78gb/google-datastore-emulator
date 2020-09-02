@@ -10,13 +10,12 @@ on:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Test on Linux
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-        node: [10, 12, 14]
+        node: [14]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,6 +24,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
+
+      - name: Docker pull google/cloud-sdk:latest
+        run: docker pull google/cloud-sdk:latest
 
       - name: Install dependencies
         run: npm install
