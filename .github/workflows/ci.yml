@@ -68,14 +68,21 @@ jobs:
         shell: powershell
 
       - name: Install Gloud SDK locally
-        run: |
-          c:\temp\GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=%GC_PATH%
-          SET PATH=%PATH%;%GC_PATH%\google-cloud-sdk\;%GC_PATH%\google-cloud-sdk\bin\
-          gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
-          gcloud.cmd components update
-          gcloud.cmd components install beta
-          gcloud.cmd components install cloud-datastore-emulator
+        run: c:\temp\GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=%GC_PATH%
         shell: cmd
+
+      - name: Add C:/CloudSDK/google-cloud-sdk to the path
+        run: echo "::add-path::C:/CloudSDK/google-cloud-sdk/"
+
+      - name: Add C:/CloudSDK/google-cloud-sdk/bin to the path
+        run: echo "::add-path::C:/CloudSDK/google-cloud-sdk/bin/"
+
+      - name: Read CLOUDSDK_PYTHON
+        run: echo ::set-output name=NVMRC::$(gcloud.cmd components copy-bundled-python)
+#          gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
+#          gcloud.cmd components update
+#          gcloud.cmd components install beta
+#          gcloud.cmd components install cloud-datastore-emulator
 
       - name: Install dependencies
         run: npm install
@@ -84,8 +91,4 @@ jobs:
         run: npm install --no-save @google-cloud/datastore
 
       - name: Run test
-        run: |
-          SET PATH=%PATH%;%GC_PATH%\google-cloud-sdk\;%GC_PATH%\google-cloud-sdk\bin\
-          gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
-          npm test
-        shell: cmd
+        run: npm test
