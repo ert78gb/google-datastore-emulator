@@ -9,13 +9,13 @@ on:
       - master
 
 jobs:
-  test:
+  test-linux:
     name: Test on Linux with Node ${{ matrix.node }}
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node: [14]
+        node: [10, 12, 14]
 
     steps:
       - uses: actions/checkout@v2
