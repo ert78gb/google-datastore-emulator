@@ -88,3 +88,4 @@ jobs:
           SET PATH=%PATH%;%GC_PATH%\google-cloud-sdk\;%GC_PATH%\google-cloud-sdk\bin\
           gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
           npm test
+        shell: cmd
