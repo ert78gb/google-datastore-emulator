@@ -28,6 +28,9 @@ jobs:
       - name: Docker pull google/cloud-sdk:latest
         run: docker pull google/cloud-sdk:latest
 
+      - name: Install locally the Gloud sdk
+        run: sudo ./scripts/install-cloud-sdk.sh
+
       - name: Install dependencies
         run: npm install
 
