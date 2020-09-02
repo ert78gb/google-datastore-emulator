@@ -81,13 +81,13 @@ jobs:
         run: echo "::set-env name=CLOUDSDK_PYTHON::$(gcloud.cmd components copy-bundled-python)"
 
       - name: Update GCloud Components
-        run: gcloud.cmd components update
+        run: gcloud.cmd components update --quiet
 
       - name: Install GCloud beta
-        run: gcloud.cmd components install beta
+        run: gcloud.cmd components install beta --quiet
 
       - name: Install cloud-datastore-emulator
-        run: gcloud.cmd components install cloud-datastore-emulator
+        run: gcloud.cmd components install cloud-datastore-emulator --quiet
 
       - name: Install dependencies
         run: npm install
