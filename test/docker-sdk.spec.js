@@ -1,8 +1,7 @@
 'use strict';
 
 // google/cloud-sdk image run only on linux os
-// TODO Turn off the test until the new Docker image issue will not solve
-const envDescribe = process.env.APPVEYOR === 'True' ? describe.skip : describe;
+const envDescribe = ['linux', 'darvin'].includes(process.platform) ? describe : describe.skip;
 
 const chai = require('chai');
 const Emulator = require('../index');
