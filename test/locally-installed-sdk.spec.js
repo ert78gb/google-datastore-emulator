@@ -39,6 +39,9 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
     process.env.GCLOUD_PROJECT = null;
   });
 
+  it('must fail', () => {
+    expect('a').to.be('b')
+  })
   it('should start the emulator with env.GCLOUD_PROJECT', () => {
     process.env.GCLOUD_PROJECT = 'test';
 
