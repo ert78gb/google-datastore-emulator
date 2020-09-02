@@ -9,13 +9,51 @@ on:
       - master
 
 jobs:
-  test-linux:
-    name: Test on Linux with Node ${{ matrix.node }}
-    runs-on: ubuntu-latest
+#  test-linux:
+#    name: Test on Linux with Node ${{ matrix.node }}
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        node: [10, 12, 14]
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Install Node.js
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: ${{ matrix.node }}
+#
+#      - name: Docker pull google/cloud-sdk:latest
+#        run: docker pull --quiet google/cloud-sdk:latest
+#
+#      - name: Install locally the Gloud sdk
+#        run: |
+#          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+#          export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+#          echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+#          sudo apt-get -qq update
+#          sudo apt-get -qq install google-cloud-sdk google-cloud-sdk-datastore-emulator
+#
+#      - name: Install dependencies
+#        run: npm install
+#
+#      - name: Install @google-cloud/datastore peer dependency
+#        run: npm install --no-save @google-cloud/datastore
+#
+#      - name: Run test
+#        run: npm test
+
+  test-windows:
+    name: Test on Windows with Node ${{ matrix.node }}
+    runs-on: windows-latest
+    env:
+      GC_PATH: 'C:\CloudSDK'
 
     strategy:
       matrix:
-        node: [10, 12, 14]
+        node: [14]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,16 +63,15 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Docker pull google/cloud-sdk:latest
-        run: docker pull --quiet google/cloud-sdk:latest
+      - name: Download GoogleCloudSDKInstaller.exe
+        run: (new-object System.Net.WebClient).DownloadFile('https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe','GoogleCloudSDKInstaller.exe')
+        shell: powershell
 
-      - name: Install locally the Gloud sdk
+      - name: Install Gloud SDK locally
         run: |
-          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-          export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-          echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          sudo apt-get -qq update
-          sudo apt-get -qq install google-cloud-sdk google-cloud-sdk-datastore-emulator
+          GoogleCloudSDKInstaller.exe /S /noreporting /nostartmenu /nodesktop /logtofile /D=%GC_PATH%
+          SET PATH=%PATH%;%GC_PATH%\google-cloud-sdk\;%GC_PATH%\google-cloud-sdk\bin\
+          gcloud.cmd components copy-bundled-python>>python_path.txt && SET /p CLOUDSDK_PYTHON=<python_path.txt && DEL python_path.txt
 
       - name: Install dependencies
         run: npm install
