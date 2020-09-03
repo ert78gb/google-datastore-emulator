@@ -90,7 +90,7 @@ jobs:
         run: gcloud.cmd components install cloud-datastore-emulator --quiet
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install @google-cloud/datastore peer dependency
         run: npm install --no-save @google-cloud/datastore

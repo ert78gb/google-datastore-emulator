@@ -1,7 +1,7 @@
 'use strict';
 
 // google/cloud-sdk image run only on linux os
-const envDescribe = ['linux', 'darvin'].includes(process.platform) ? describe : describe.skip;
+const envDescribe = ['linux', 'darwin'].includes(process.platform) ? describe : describe.skip;
 
 const chai = require('chai');
 const Emulator = require('../index');

@@ -39,7 +39,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
     process.env.GCLOUD_PROJECT = null;
   });
 
-  it.only('should start the emulator with env.GCLOUD_PROJECT', () => {
+  it('should start the emulator with env.GCLOUD_PROJECT', () => {
     process.env.GCLOUD_PROJECT = 'test';
 
     let entityKey;
@@ -321,7 +321,6 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
   });
 
   it('process.exit should kill child processes', function (done) {
-    this.timeout(10000);
 
     process.env.GCLOUD_PROJECT = 'test';
 
