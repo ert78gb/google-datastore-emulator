@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "mocha --ui bdd --timeout 120000  --bail test/**/*.spec.js",
+    "test": "mocha --ui bdd --timeout 120000 --bail test/**/*.spec.js",
     "test:appveyor": "mocha --reporter mocha-appveyor-reporter --reporter-options appveyorBatchSize=1 --ui bdd --timeout 120000 test/**/*.spec.js",
     "coverage": "nyc npm run test",
     "release": "standard-version"
