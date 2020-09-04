@@ -320,7 +320,7 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       .then(emulator.stop.bind(emulator));
   });
 
-  it('process.exit should kill child processes', function (done) {
+  it.skip('process.exit should kill child processes', function (done) {
 
     process.env.GCLOUD_PROJECT = 'test';
 
