@@ -9,41 +9,41 @@ on:
       - master
 
 jobs:
-#  test-linux:
-#    name: Test on Linux with Node ${{ matrix.node }}
-#    runs-on: ubuntu-latest
-#
-#    strategy:
-#      matrix:
-#        node: [10, 12, 14]
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#
-#      - name: Install Node.js
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node }}
-#
-#      - name: Docker pull google/cloud-sdk:latest
-#        run: docker pull --quiet google/cloud-sdk:latest
-#
-#      - name: Install locally the Gloud sdk
-#        run: |
-#          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-#          export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-#          echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-#          sudo apt-get -qq update
-#          sudo apt-get -qq install google-cloud-sdk google-cloud-sdk-datastore-emulator
-#
-#      - name: Install dependencies
-#        run: npm install
-#
-#      - name: Install @google-cloud/datastore peer dependency
-#        run: npm install --no-save @google-cloud/datastore
-#
-#      - name: Run test
-#        run: npm test
+  test-linux:
+    name: Test on Linux with Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [10, 12, 14]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Docker pull google/cloud-sdk:latest
+        run: docker pull --quiet google/cloud-sdk:latest
+
+      - name: Install locally the Gloud sdk
+        run: |
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+          echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          sudo apt-get -qq update
+          sudo apt-get -qq install google-cloud-sdk google-cloud-sdk-datastore-emulator
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install @google-cloud/datastore peer dependency
+        run: npm install --no-save @google-cloud/datastore
+
+      - name: Run test
+        run: npm test
 
   test-windows:
     name: Test on Windows with Node ${{ matrix.node }}
