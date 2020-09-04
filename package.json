@@ -6,7 +6,6 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "mocha --ui bdd --timeout 120000 --bail test/**/*.spec.js",
-    "test:appveyor": "mocha --reporter mocha-appveyor-reporter --reporter-options appveyorBatchSize=1 --ui bdd --timeout 120000 test/**/*.spec.js",
     "coverage": "nyc npm run test",
     "release": "standard-version"
   },
@@ -30,11 +29,10 @@
     "tree-kill": "^1.2.2"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.7",
+    "@types/mocha": "^8.0.3",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^7.0.1",
-    "mocha-appveyor-reporter": "^0.4.2",
+    "mocha": "^8.1.3",
     "nyc": "^15.0.0",
     "standard-version": "^8.0.1"
   },
