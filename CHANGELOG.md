@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file. See [standa
 ## [4.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v3.0.2...v4.0.0) (2020-09-05)
 
 
+### ⚠ BREAKING CHANGES
+
+* supported node 10+
+fs-extra dropped older then node 10 support
+
 ### Bug Fixes
 
 * change peer dep version @google-cloud/datastore <7.0.0 ([2259622](https://github.com/ert78gb/google-datastore-emulator/commit/225962211483d2b8ac0ad8a3654774c501ae0c09))
