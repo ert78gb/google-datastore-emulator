@@ -22,6 +22,11 @@
   },
   "author": "Robert Kiss <ert78gb@gmail.com>",
   "license": "MIT",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "src/"
+  ],
   "dependencies": {
     "dockerode": "^3.1.0",
     "fs-extra": "^8.1.0",
