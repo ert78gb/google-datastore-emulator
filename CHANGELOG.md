@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v3.0.2...v4.0.0) (2020-09-05)
+
+
+### Bug Fixes
+
+* change peer dep version @google-cloud/datastore <7.0.0 ([2259622](https://github.com/ert78gb/google-datastore-emulator/commit/225962211483d2b8ac0ad8a3654774c501ae0c09))
+* upgrade dockerode => 3.2.1 ([#53](https://github.com/ert78gb/google-datastore-emulator/issues/53)) ([f02fda6](https://github.com/ert78gb/google-datastore-emulator/commit/f02fda6e70bf3df8d6d58da807ea8e4dd69fa681))
+* upgrade fs-extra => 9.0.1 ([#54](https://github.com/ert78gb/google-datastore-emulator/issues/54)) ([4841814](https://github.com/ert78gb/google-datastore-emulator/commit/4841814793b3ee8d18f115cbe05685a174396ae7))
+
 ### [3.0.2](https://github.com/ert78gb/google-datastore-emulator/compare/v3.0.1...v3.0.2) (2020-02-16)
 
 
