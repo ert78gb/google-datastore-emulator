@@ -2,6 +2,7 @@ Google Cloud Datastore Emulator
 ===============================
 
 ![CI](https://github.com/ert78gb/google-datastore-emulator/workflows/CI/badge.svg)
+![CodeQL](https://github.com/ert78gb/google-datastore-emulator/workflows/CodeQL/badge.svg)
 
 This package helps to start / stop [Google Datatstore Emulator](https://cloud.google.com/sdk/gcloud/reference/beta/emulators/datastore/) with javascript.
 From 1.1.0 also could usable with [google/cloud-sdk](https://hub.docker.com/r/google/cloud-sdk/) docker image. 
