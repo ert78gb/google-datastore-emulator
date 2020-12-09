@@ -48,8 +48,6 @@ jobs:
   test-windows:
     name: Test on Windows with Node ${{ matrix.node }}
     runs-on: windows-latest
-    env:
-      GC_PATH: 'C:\CloudSDK'
 
     strategy:
       matrix:
@@ -65,6 +63,9 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
+
+      - name: Use gcloud CLI
+        run: gcloud info
 
       - name: Install dependencies
         run: npm ci
