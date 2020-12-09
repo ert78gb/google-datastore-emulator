@@ -72,13 +72,13 @@ jobs:
         shell: cmd
 
       - name: Add C:/CloudSDK/google-cloud-sdk to the path
-        run: echo "::add-path::C:/CloudSDK/google-cloud-sdk/"
+        run: echo "C:/CloudSDK/google-cloud-sdk/" >> $GITHUB_PATH
 
       - name: Add C:/CloudSDK/google-cloud-sdk/bin to the path
-        run: echo "::add-path::C:/CloudSDK/google-cloud-sdk/bin/"
+        run: echo "C:/CloudSDK/google-cloud-sdk/bin/" >> $GITHUB_PATH
 
       - name: Set CLOUDSDK_PYTHON env
-        run: echo "::set-env name=CLOUDSDK_PYTHON::$(gcloud.cmd components copy-bundled-python)"
+        run: echo "CLOUDSDK_PYTHON=$(gcloud.cmd components copy-bundled-python)" >> $GITHUB_ENV
 
       - name: Update GCloud Components
         run: gcloud.cmd components update --quiet
