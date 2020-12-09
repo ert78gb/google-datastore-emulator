@@ -67,6 +67,9 @@ jobs:
       - name: Use gcloud CLI
         run: gcloud info
 
+      - name: Update GCloud Components
+        run: gcloud.cmd components update --quiet
+
       - name: Install GCloud beta
         run: gcloud.cmd components install beta --quiet
 
