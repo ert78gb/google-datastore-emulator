@@ -36,13 +36,13 @@ jobs:
         run: gcloud info
 
       - name: Update GCloud Components
-        run: gcloud.cmd components update --quiet
+        run: gcloud components update --quiet
 
       - name: Install GCloud beta
-        run: gcloud.cmd components install beta --quiet
+        run: gcloud components install beta --quiet
 
       - name: Install cloud-datastore-emulator
-        run: gcloud.cmd components install cloud-datastore-emulator --quiet
+        run: gcloud components install cloud-datastore-emulator --quiet
 
       - name: Install dependencies
         run: npm ci
