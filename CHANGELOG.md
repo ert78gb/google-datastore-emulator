@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v4.0.0...v5.0.0) (2021-07-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop Node 10 support
+
+### Features
+
+* Node.js 16 support ([#87](https://github.com/ert78gb/google-datastore-emulator/issues/87)) ([85bf68d](https://github.com/ert78gb/google-datastore-emulator/commit/85bf68da23d007c2a1a1f02b3bc968dee5a379e1))
+
 ## [4.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v3.0.2...v4.0.0) (2020-09-05)
 
 
