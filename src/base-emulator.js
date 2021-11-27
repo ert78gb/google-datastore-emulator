@@ -150,7 +150,7 @@ class BaseEmulator {
     const params = ['beta', 'emulators', 'datastore', 'start'];
 
     if (this._options.project) {
-      params.push('--project=' + this._options.project);
+      params.push(...['--project', this._options.project]);
     }
 
     this._setHostPort(params);
