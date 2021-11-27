@@ -5,7 +5,7 @@ const EventEmitter = require('events');
 const fse = require('fs-extra');
 
 const EmulatorStates = require('./emulator-states');
-
+const getConsistencyArg = require('./get-consistency-arg')
 class DataStoreStateEmitter extends EventEmitter {
 }
 
@@ -165,7 +165,7 @@ class BaseEmulator {
       params.push('--no-store-on-disk')
     }
 
-    this._setConsistency(params);
+    params.push(...getConsistencyArg(this._options))
 
     return params;
   }
@@ -188,17 +188,6 @@ class BaseEmulator {
    */
   _setDatadir /* istanbul ignore next */(params) {
     throw new Error('_setDatadir method must be implement')
-  }
-
-  /**
-   * Depend from the engine how to set data directory for the emulator
-   * @param params
-   * @protected
-   * @abstract
-   */
-  _setConsistency(params) /* istanbul ignore next */ {
-    throw new Error('_setConsistency method must be implement')
-
   }
 
   /**

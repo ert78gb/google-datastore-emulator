@@ -157,17 +157,6 @@ class DockerSdk extends BaseEmulator {
   _setDatadir(params) {
   }
 
-  /**
-   * Override the base class method. Set the consistency level of the emulator
-   * @param params
-   * @protected
-   */
-  _setConsistency(params) {
-    if (this._options.consistency) {
-      params.push(...['--consistency', this._options.consistency])
-    }
-  }
-
 }
 
 module.exports = DockerSdk;
