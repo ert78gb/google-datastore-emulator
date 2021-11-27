@@ -65,7 +65,7 @@ class LocallyInstalledSdk extends BaseEmulator {
    * @protected
    */
   _setHostPort(params) {
-    params.push(`--host-port=${this._options.host}:${this._options.port}`);
+    params.push(...['--host-port', `${this._options.host}:${this._options.port}`]);
   }
 
   /**
@@ -76,7 +76,7 @@ class LocallyInstalledSdk extends BaseEmulator {
   _setDatadir(params) {
     if (this._options.dataDir) {
       this._createDataDirSync();
-      params.push('--data-dir=' + this._options.dataDir);
+      params.push(...['--data-dir', this._options.dataDir]);
     }
   }
 
@@ -87,7 +87,7 @@ class LocallyInstalledSdk extends BaseEmulator {
    */
   _setConsistency(params) {
     if (this._options.consistency) {
-      params.push(`--consistency="${this._options.consistency}"`)
+      params.push(...['--consistency', this._options.consistency])
     }
   }
 

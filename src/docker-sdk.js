@@ -164,7 +164,7 @@ class DockerSdk extends BaseEmulator {
    */
   _setConsistency(params) {
     if (this._options.consistency) {
-      params.push(`--consistency=${this._options.consistency}`)
+      params.push(...['--consistency', this._options.consistency])
     }
   }
 
