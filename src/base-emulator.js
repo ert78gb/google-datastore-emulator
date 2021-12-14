@@ -147,7 +147,7 @@ class BaseEmulator {
    * @protected
    */
   _getCommandParameters() {
-    const params = ['beta', 'emulators', 'datastore', 'start'];
+    const params = ['-q', 'beta', 'emulators', 'datastore', 'start'];
 
     if (this._options.project) {
       params.push(...['--project', this._options.project]);
