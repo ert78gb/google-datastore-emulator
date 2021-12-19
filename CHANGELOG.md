@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/ert78gb/google-datastore-emulator/compare/v5.0.0...v5.1.0) (2021-12-19)
+
+
+### Features
+
+* do not allow interactive prompts. ([#103](https://github.com/ert78gb/google-datastore-emulator/issues/103)) ([ca416b8](https://github.com/ert78gb/google-datastore-emulator/commit/ca416b8867c8012db19ce3448c45383c21f88a77))
+
+
+### Bug Fixes
+
+* bump dockerode from 3.3.0 to 3.3.1 ([#94](https://github.com/ert78gb/google-datastore-emulator/issues/94)) ([0eb499a](https://github.com/ert78gb/google-datastore-emulator/commit/0eb499a16f82a79222478c2e8e9350dad330b1bf))
+* remove code duplication of the consistency param calculation ([#102](https://github.com/ert78gb/google-datastore-emulator/issues/102)) ([9f8c963](https://github.com/ert78gb/google-datastore-emulator/commit/9f8c96342f70891138592dfba5e0f20bb92f9cec))
+* unsafe shell command construction ([#101](https://github.com/ert78gb/google-datastore-emulator/issues/101)) ([ed31fcf](https://github.com/ert78gb/google-datastore-emulator/commit/ed31fcf0ad5bc944d40f678ce0912f38d38a862e))
+
 ## [5.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v4.0.0...v5.0.0) (2021-07-17)
 
 
