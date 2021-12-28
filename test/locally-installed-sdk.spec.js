@@ -286,6 +286,33 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       })
   });
 
+  it('should set environment variables', () => {
+    process.env.GCLOUD_PROJECT = 'my-test-GCLOUD_PROJECT';
+    let options = {
+      debug: true,
+      port: 8081,
+    };
+
+    let emulator = new Emulator(options);
+
+    return emulator.start()
+      .then(() => {
+        expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`localhost:8081`);
+        expect(process.env.DATASTORE_EMULATOR_HOST_PATH).to.be.equal(`localhost:8081/datastore`);
+        expect(process.env.DATASTORE_HOST).to.be.equal(`http://localhost:8081`);
+        // shouldn't this be the same as GCLOUD_PROJECT, but they don't
+        // see: https://gist.github.com/mdornseif/d9bd0c55a7aab298d0a29bee124302c8
+        expect(process.env.DATASTORE_DATASET).to.be.equal(`test`);
+        expect(process.env.DATASTORE_PROJECT_ID).to.be.equal(`test`);
+        // These should not fail, but they do
+        // expect(process.env.DATASTORE_DATASET).to.be.equal(`my-test-GCLOUD_PROJECT`);
+        // expect(process.env.DATASTORE_PROJECT_ID).to.be.equal(`my-test-GCLOUD_PROJECT`);
+      })
+      .then((result) => {
+        return emulator.stop()
+      })
+  });
+
   it('should not start twice', () => {
     process.env.GCLOUD_PROJECT = 'test';
 

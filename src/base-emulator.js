@@ -137,12 +137,11 @@ class BaseEmulator {
     process.env.DATASTORE_EMULATOR_HOST = `${this._options.host}:${this._options.port}`;
     process.env.DATASTORE_EMULATOR_HOST_PATH = `${this._options.host}:${this._options.port}/datastore`
     process.env.DATASTORE_HOST = `http://${this._options.host}:${this._options.port}`
-    process.env.DATASTORE_DATASET = 'test'
-    
+    process.env.DATASTORE_DATASET = this._options.project
+
     if (!process.env.DATASTORE_PROJECT_ID && this._options.project) {
       process.env.DATASTORE_PROJECT_ID = this._options.project
     }
-    process.env.GCLOUD_PROJECT = process.env.DATASTORE_PROJECT_ID
   }
 
   /**
