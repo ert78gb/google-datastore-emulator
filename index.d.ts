@@ -37,7 +37,7 @@ interface Options {
   /**
    * Default: 8081
    *
-   * If it is empty the emulator selects a random free port. If use docker version always set port.
+   * Preferred port number. The docker version always uses 8081.
    */
   port?: number;
 

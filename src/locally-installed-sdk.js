@@ -5,6 +5,7 @@ const kill = require('tree-kill');
 
 const EmulatorStates = require('./emulator-states');
 const BaseEmulator = require('./base-emulator');
+const portfinder = require('portfinder');
 
 /**
  * Wrapper for the locally installed SDK
@@ -27,12 +28,16 @@ class LocallyInstalledSdk extends BaseEmulator {
       if (this._state)
         throw new Error('Datastore emulator is already running.');
 
-      super._start(resolve, reject);
+        portfinder.getPortPromise({port: this._options.port}).then(port => {
+        this._options.port = port
+        console.log(port, this._options.port)
+        super._start(resolve, reject);
+        const params = this._getCommandParameters();
+        console.log(params)
+        self._emulator = spawn('gcloud', params, { shell: true });
 
-      const params = this._getCommandParameters();
-      self._emulator = spawn('gcloud', params, { shell: true });
-
-      self._registerEmulatorListeners();
+        self._registerEmulatorListeners();
+      })
     })
 
   }
