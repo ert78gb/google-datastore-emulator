@@ -363,7 +363,8 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
   it('should throw proper exception when port already in use', async () => {
     const options = {
       debug: true,
-      port: 8081
+      port: 8081,
+      useDocker: true
     };
     let emulator1, emulator2;
     let emulator1Started = false;
@@ -375,7 +376,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       await emulator2.start();
     } catch (error) {
       expect(emulator1Started).to.be.true;
-      expect(error.message).to.be.equal('"localhost:8081" port already in use!')
+      expect(error.message).to.be.includes('port is already allocated')
     } finally {
       await emulator1.stop();
       await emulator2.stop();
