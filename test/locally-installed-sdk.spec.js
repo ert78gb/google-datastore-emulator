@@ -361,6 +361,29 @@ describe('Locally Installed Google DataStore Emulator Test', () => {
       await emulator.stop();
     }
   })
+
+  it('should throw proper exception when port already in use', async () => {
+    const options = {
+      debug: true,
+      port: 8081
+    };
+    let emulator1, emulator2;
+    let emulator1Started = false;
+    try {
+      emulator1 = new Emulator(options);
+      await emulator1.start();
+      emulator1Started = true;
+      emulator2 = new Emulator(options);
+      await emulator2.start();
+    } catch (error) {
+      expect(emulator1Started).to.be.true;
+      expect(error.message).to.be.equal('"localhost:8081" port already in use!')
+    } finally {
+      await emulator1.stop();
+      await emulator2.stop();
+    }
+  })
+
 });
 
 describe('Consistency test', () => {
