@@ -382,4 +382,62 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       await emulator2.stop();
     }
   })
+
+  it('should able to start multiple emulator on different port if them provided', async () => {
+    let emulator1, emulator2;
+    delete process.env.DATASTORE_EMULATOR_HOST;
+    try {
+      emulator1 = new Emulator({
+        debug: true,
+        port: 8081,
+        useDocker: true,
+      });
+      await emulator1.start();
+      expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal('localhost:8081')
+      emulator2 = new Emulator({
+        debug: true,
+        port: 8082,
+        useDocker: true,
+      });
+      await emulator2.start();
+      // Running 2 emulator in the same text context so the environment variable will override
+      expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal('localhost:8082')
+    } finally {
+      if (emulator1)
+        await emulator1.stop();
+      if (emulator2)
+      await emulator2.stop();
+    }
+  })
+
+  it('should able to start multiple emulator on dynamically allocated port', async () => {
+    let emulator1, emulator2, emulator1env, emulator2env;
+    delete process.env.DATASTORE_EMULATOR_HOST;
+    try {
+      emulator1 = new Emulator({
+        debug: true,
+        useDocker: true,
+      });
+      await emulator1.start();
+      // Running 2 emulator in the same text context so the environment variable will override
+      // we have to store them to compare
+      emulator1env = process.env.DATASTORE_EMULATOR_HOST;
+      emulator2 = new Emulator({
+        debug: true,
+        useDocker: true,
+      });
+      await emulator2.start();
+      emulator2env = process.env.DATASTORE_EMULATOR_HOST;
+
+      expect(emulator1).to.be.ok;
+      expect(emulator2).to.be.ok;
+      expect(emulator1env).to.be.not.equal(emulator2env);
+    } finally {
+      if (emulator1)
+        await emulator1.stop();
+      if (emulator2)
+        await emulator2.stop();
+    }
+  })
+
 });
