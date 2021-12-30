@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/ert78gb/google-datastore-emulator/compare/v5.1.0...v5.2.0) (2021-12-30)
+
+
+### Features
+
+* dynamically allocate emulator port ([#108](https://github.com/ert78gb/google-datastore-emulator/issues/108)) ([6bc29be](https://github.com/ert78gb/google-datastore-emulator/commit/6bc29be434036c96481120c3ef536d834097db6b))
+
+
+### Bug Fixes
+
+* throw proper exception when emulator can't start because port already in used ([#106](https://github.com/ert78gb/google-datastore-emulator/issues/106)) ([ad26bef](https://github.com/ert78gb/google-datastore-emulator/commit/ad26bef91ff2852346f1013331012ce9f139a548))
+
 ## [5.1.0](https://github.com/ert78gb/google-datastore-emulator/compare/v5.0.0...v5.1.0) (2021-12-19)
 
 
