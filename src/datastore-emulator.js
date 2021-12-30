@@ -6,7 +6,6 @@ const DEFAULT_OPTIONS = {
   debug: false,
   useDocker: false,
   host:'localhost',
-  port: 8081,
   project:'test',
   consistency: '1.0',
   dockerImage: 'google/cloud-sdk:latest'
@@ -16,6 +15,7 @@ const nodeCleanup = require('node-cleanup');
 
 const LocallyInstalledSdk = require('./locally-installed-sdk');
 const DockerSdk = require('./docker-sdk');
+const getEmulatorPort = require('./get-emulator-port')
 
 /**
  * DataStoreEmulator class only select the emulator engine:
@@ -49,7 +49,9 @@ class DataStoreEmulator {
    * Start the emulator
    * @returns {Promise}
    */
-  start() {
+  async start() {
+    this._options.port = await getEmulatorPort(this._options.port);
+
     return this.engine.start()
   }
 
