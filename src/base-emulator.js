@@ -1,12 +1,12 @@
 'use strict';
 const DEV_APP_SERVER_RUNNING_KEY = '[datastore] Dev App Server is now running.';
-const DEV_APP_PORT_BIND_ERROR = '[datastore] Exiting due to exception: java.io.IOException: Failed to bind';
 
 const EventEmitter = require('events');
 const fse = require('fs-extra');
 
 const EmulatorStates = require('./emulator-states');
 const getConsistencyArg = require('./get-consistency-arg')
+const isPortAlreadyInUse = require('./is-port-already-in-use')
 class DataStoreStateEmitter extends EventEmitter {
 }
 
@@ -105,7 +105,7 @@ class BaseEmulator {
     if (text.indexOf(DEV_APP_SERVER_RUNNING_KEY) > -1) {
       this._setEnviromentVariables();
       this._setState(EmulatorStates.RUNNING);
-    } else if (text.includes(DEV_APP_PORT_BIND_ERROR)) {
+    } else if (isPortAlreadyInUse(text)) {
       this._setState(EmulatorStates.ERROR, new Error(`"${this._options.host}:${this._options.port}" port already in use!`));
     }
   }
