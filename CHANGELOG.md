@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v5.2.0...v6.0.0) (2022-06-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop node 12 support
+
+### Features
+
+* node 18 support ([#119](https://github.com/ert78gb/google-datastore-emulator/issues/119)) ([3b6bfa9](https://github.com/ert78gb/google-datastore-emulator/commit/3b6bfa99c96477fc817923dda2eaee318674fdcb))
+
+
+### Bug Fixes
+
+* allow @google-cloud/datastore 7.0.0 ([#114](https://github.com/ert78gb/google-datastore-emulator/issues/114)) ([c8bd236](https://github.com/ert78gb/google-datastore-emulator/commit/c8bd2365e3f0414a67ac7e60e57b9f0ad86b2baf))
+* handle other "port already in use" error message ([#118](https://github.com/ert78gb/google-datastore-emulator/issues/118)) ([19bd174](https://github.com/ert78gb/google-datastore-emulator/commit/19bd174dea209b7b87c7391c1208c09f91ba1581))
+
 ## [5.2.0](https://github.com/ert78gb/google-datastore-emulator/compare/v5.1.0...v5.2.0) (2021-12-30)
 
 
