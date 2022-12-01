@@ -25,6 +25,12 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-package: jre
+          java-version: 11
+
       - name: Docker pull google/cloud-sdk:latest
         run: docker pull --quiet google/cloud-sdk:latest
         if: runner.os == 'Linux'
