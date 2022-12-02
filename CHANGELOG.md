@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.1](https://github.com/ert78gb/google-datastore-emulator/compare/v6.0.0...v6.0.1) (2022-12-02)
+
+
+### Bug Fixes
+
+* bump fs-extra from 10.1.0 to 11.1.0 ([#124](https://github.com/ert78gb/google-datastore-emulator/issues/124)) ([f155a5c](https://github.com/ert78gb/google-datastore-emulator/commit/f155a5c4f2049efa106197e480aa30feb9357755))
+* bump get-port from 5.1.1 to 6.1.2 ([#112](https://github.com/ert78gb/google-datastore-emulator/issues/112)) ([f10e20c](https://github.com/ert78gb/google-datastore-emulator/commit/f10e20cb98bdd5127616d331c7415ce158cbd160))
+
 ## [6.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v5.2.0...v6.0.0) (2022-06-22)
 
 
