@@ -14,11 +14,10 @@ const { Datastore } = require('@google-cloud/datastore');
 chai.use(require("chai-as-promised"));
 
 const testUtil = require('./test-util');
+const assertTestData = require('./_helpers/assert-test-data.js')
+const { TEST_DATA, getTestKeyOptions } = require('./_helpers/constants.js')
 
 const expect = chai.expect;
-const testData = {
-  testProp: 'test-data'
-};
 
 envDescribe('Docker Container Google DataStore Emulator Test', () => {
   const emulatorDir = './emulator-test3';
@@ -59,10 +58,10 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
     return emulator.start()
       .then(() => {
         const datastore = new Datastore();
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key(getTestKeyOptions());
         const testEntity = {
           key: entityKey,
-          data: testData
+          data: TEST_DATA
         };
 
         return datastore.save(testEntity);
@@ -72,11 +71,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
         return datastore.get(entityKey);
       })
-      .then((result) => {
-        expect(result.length).to.be.equal(1);
-        const entity = result[0];
-        expect(entity).to.be.deep.equal(testData);
-      })
+      .then(assertTestData)
       .then(() => {
         return emulator.stop();
       })
@@ -133,10 +128,10 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         const datastore = new Datastore({
           projectId
         });
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key(getTestKeyOptions());
         const testEntity = {
           key: entityKey,
-          data: testData
+          data: TEST_DATA
         };
 
         return datastore.save(testEntity);
@@ -148,13 +143,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
         return datastore.get(entityKey);
       })
-      .then((result) => {
-        expect(result.length).to.be.equal(1);
-        const entity = result[0];
-        expect(entity).to.be.deep.equal(testData);
-
-        return Promise.resolve();
-      })
+      .then(assertTestData)
       .then(() => {
         return emulator.stop();
       })
@@ -186,10 +175,10 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
         const datastore = new Datastore({
           projectId
         });
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key(getTestKeyOptions());
         const testEntity = {
           key: entityKey,
-          data: testData
+          data: TEST_DATA
         };
 
         return datastore.save(testEntity);
@@ -201,13 +190,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
         return datastore.get(entityKey);
       })
-      .then((result) => {
-        expect(result.length).to.be.equal(1);
-        const entity = result[0];
-        expect(entity).to.be.deep.equal(testData);
-
-        return Promise.resolve();
-      })
+      .then(assertTestData)
       .then(() => {
         return emulator.stop();
       })
@@ -234,10 +217,10 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`${options.host}:${options.port}`);
         const datastore = new Datastore();
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key(getTestKeyOptions());
         const testEntity = {
           key: entityKey,
-          data: testData
+          data: TEST_DATA
         };
 
         return datastore.save(testEntity);
@@ -249,11 +232,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       })
       .then((result) => {
         return emulator.stop()
-          .then(() => {
-            expect(result.length).to.be.equal(1);
-            const entity = result[0];
-            expect(entity).to.be.deep.equal(testData);
-          })
+          .then(() => assertTestData(result))
       })
   });
 
@@ -274,10 +253,10 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
 
         expect(process.env.DATASTORE_EMULATOR_HOST).to.be.equal(`localhost:${options.port}`);
         const datastore = new Datastore();
-        entityKey = datastore.key({namespace: 'test-ns', path: ['test-path']});
+        entityKey = datastore.key(getTestKeyOptions());
         const testEntity = {
           key: entityKey,
-          data: testData
+          data: TEST_DATA
         };
 
         return datastore.save(testEntity);
@@ -289,12 +268,7 @@ envDescribe('Docker Container Google DataStore Emulator Test', () => {
       })
       .then((result) => {
         return emulator.stop()
-          .then(() => {
-            expect(result.length).to.be.equal(1);
-            const entity = result[0];
-            expect(entity).to.be.deep.equal(testData);
-
-          });
+          .then(() => assertTestData(result));
       })
   });
 
