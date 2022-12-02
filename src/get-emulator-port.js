@@ -1,5 +1,3 @@
-const getPort = require('get-port');
-
 const DEFAULT_PORT = 8081;
 
 /**
@@ -11,6 +9,8 @@ const DEFAULT_PORT = 8081;
 async function getEmulatorPort(preferredPort) {
   if (preferredPort)
     return preferredPort;
+
+  const { default: getPort } = await import('get-port');
 
   return getPort({
     port: DEFAULT_PORT,
