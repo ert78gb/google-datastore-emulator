@@ -58,4 +58,5 @@ jobs:
         run: npm install --no-save @google-cloud/datastore
 
       - name: Run test
+        timeout-minutes: 15
         run: npm test
