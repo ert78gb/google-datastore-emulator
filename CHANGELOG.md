@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v6.0.1...v7.0.0) (2023-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* Require Node.js 16
+
+### Bug Fixes
+
+* bump get-port from 6.1.2 to 7.0.0 ([#127](https://github.com/ert78gb/google-datastore-emulator/issues/127)) ([f5e8aaa](https://github.com/ert78gb/google-datastore-emulator/commit/f5e8aaa83e4e5fc47cba96c5c2c3f4624f744fe9))
+
 ### [6.0.1](https://github.com/ert78gb/google-datastore-emulator/compare/v6.0.0...v6.0.1) (2022-12-02)
 
 
