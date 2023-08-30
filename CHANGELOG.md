@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://github.com/ert78gb/google-datastore-emulator/compare/v7.0.0...v7.1.0) (2023-08-30)
+
+
+### Features
+
+* support @google-cloud/datastore 8.x ([#130](https://github.com/ert78gb/google-datastore-emulator/issues/130)) ([8b66df6](https://github.com/ert78gb/google-datastore-emulator/commit/8b66df6e6709b5a3e6ae52f1016680cbc8918a53))
+
 ## [7.0.0](https://github.com/ert78gb/google-datastore-emulator/compare/v6.0.1...v7.0.0) (2023-06-10)
 
 
