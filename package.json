@@ -43,6 +43,6 @@
     "standard-version": "^9.0.0"
   },
   "peerDependencies": {
-    "@google-cloud/datastore": ">=1.0.0 <8.0.0"
+    "@google-cloud/datastore": ">=1.0.0 <9.0.0"
   }
 }
