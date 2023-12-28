@@ -28,7 +28,7 @@
     "src/"
   ],
   "dependencies": {
-    "dockerode": "^3.2.1",
+    "dockerode": "^4.0.2",
     "fs-extra": "^11.1.0",
     "get-port": "^7.0.0",
     "node-cleanup": "^2.1.2",
